@@ -2,9 +2,24 @@
 <html>
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/css/style.css' />
+      <link href="css/bootstrap.min.css" rel="stylesheet" />
+      <script src="http://code.jquery.com/jquery-latest.js"></script>
+      <script src="js/bootstrap.min.js"></script>
   </head>
   <body>
-    <%- body %>
+    <div class="wrapper">
+        <h1>Welcome</h1>
+          <div class="navbar">
+              <div class="navbar-inner">
+                  <ul class="nav">
+                      <li class="<%= title === 'Home' ? 'active' : '' %>"><a href="/">Home</a></li>
+                      <li class="<%= title === 'Products' ? 'active' : '' %>"><a href="/viewAllProducts">View All Products</a></li>
+                  </ul>
+              </div>
+          </div>
+          <h2><%= title %></h2>
+          <%- body %>
+        </div>
   </body>
 </html>
