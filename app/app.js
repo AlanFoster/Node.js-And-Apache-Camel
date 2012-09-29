@@ -4,7 +4,7 @@
  */
 
 var express = require("express"),
-    routes = require("./routes"),
+    routes = require("./controllers"),
     _ = require("underscore");
 
 var config = {
@@ -44,6 +44,6 @@ app.configure("production", function(){
 app.get("/", routes.index.handle);
 app.get("/viewAllProducts", routes.viewAllProducts.handle);
 
-app.listen(3000, function(){
+app.listen(3001, function createServer(){
   console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
 });
