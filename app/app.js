@@ -39,6 +39,12 @@ app.configure("production", function(){
   app.use(express.errorHandler());
 });
 
+// User
+app.use(function(req, res, next){
+  //  res.locals.user = req.user;
+    next();
+});
+
 // Routes
 
 app.get("/", routes.index.handle);
@@ -49,6 +55,6 @@ app.get("/shoppingCart", routes.shoppingCart.handle);
 app.post("/validateLogin", routes.validateLogin.handle);
 
 
-app.listen(3002, function createServer(){
+app.listen(3003, function createServer(){
   console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
 });

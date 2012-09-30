@@ -1,6 +1,7 @@
 (function($) {
     $(function() {
-        $("#loginForm").submit(function(){
+         $("#loginForm").submit(function(){
+            $("#submitButton").button("loading");
             $.ajax({
                 url : "/validateLogin",
                 type : "POST",
@@ -8,9 +9,9 @@
                 success : function(res) {
 
                     if(res.loginSuccess) {
-                        alert("success");
                         window.location.href = "/shoppingCart";
                     } else {
+                        $("#submitButton").button("reset");
                         $("#invalidLogin").show();
                     }
                 }

@@ -31,16 +31,13 @@ exports.shoppingCart  = {
                 res.redirect("/login");
                 return;
             }
-            res.render("shoppingCart", {
-                title : "Shopping Cart",
-                user : user,
-                shoppingCart : getFullShoppingCart(user.shoppingCartDetails)
-            });
+            users.getFullShoppingCart(user.id, function(err, shoppingCart) {
+                res.render("shoppingCart", {
+                    title : "Shopping Cart",
+                    user : user,
+                    shoppingCart : shoppingCart
+                });
+            })
         });
     }
 };
-
-function getFullShoppingCart(shoppingCartDetails) {
-  //  return products.getFullShoppingCart(shoppingCartDetails);
-    return [];
-}
