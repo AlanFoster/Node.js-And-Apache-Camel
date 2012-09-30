@@ -1,0 +1,26 @@
+<? if(partialViewProducts && partialViewProducts.length > 0) { ?>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Product Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Details</th>
+            <th>Order</th>
+        </tr>
+        </thead>
+        <? partialViewProducts.forEach(function(product) { ?>
+            <tr>
+                <td><?= product.id ?></td>
+                <td><?= product.name ?></td>
+                <td><?= product.description ?></td>
+                <td><?= product.price ?></td>
+                <td><a href="#">View more details</a></td>
+                <td><a href="#">Add To Cart</a></td>
+            </tr>
+        <? }); ?>
+    </table>
+<? } else { ?>
+   <i>You currently have no shopping cart</i>
+<? } ?>
