@@ -50,6 +50,6 @@ app.get("/logout", routes.logout.handle);
 app.post("/validateLogin", routes.validateLogin.handle);
 
 
-app.listen(3003, function createServer(){
+app.listen(3000, function createServer(){
   console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
 });
