@@ -43,7 +43,12 @@ app.configure("production", function(){
 
 app.get("/", routes.index.handle);
 app.get("/viewAllProducts", routes.viewAllProducts.handle);
+app.get("/login", routes.viewLogin.handle);
+app.get("/shoppingCart", routes.shoppingCart.handle);
 
-app.listen(3001, function createServer(){
+app.post("/validateLogin", routes.validateLogin.handle);
+
+
+app.listen(3002, function createServer(){
   console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
 });

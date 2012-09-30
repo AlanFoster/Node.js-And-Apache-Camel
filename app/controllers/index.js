@@ -1,6 +1,7 @@
 var subRoutes = [
     {name : "main index routes", value : require("./main.js")},
-    {name : "order routes", value : require("./products.js")}
+    {name : "order routes", value : require("./products.js")},
+    {name : "login", value : require("./users.js")}
 ];
 
 subRoutes.forEach(function(subRoute) {

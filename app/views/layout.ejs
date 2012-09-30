@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <title><?= title ?></title>
     <link rel='stylesheet' href='/css/style.css' />
@@ -8,9 +8,14 @@
       <script src="js/bootstrap.min.js"></script>
   </head>
   <body>
-    <div class="wrapper">
-        <h1><?= app.locals.websiteName ?></h1>
-        <p class="muted"><?= app.locals.motto ?></p>
+    <div class="container-fluid wrapper">
+        <div class="row">
+            <div class="span5">
+                <h1><?= app.locals.websiteName ?></h1>
+                <p class="muted"><?= app.locals.motto ?></p>
+            </div>
+        </div>
+
           <div class="navbar">
               <div class="navbar-inner">
                   <ul class="nav">
@@ -19,8 +24,20 @@
                   </ul>
               </div>
           </div>
-          <h2><?= title ?></h2>
-          <?- body ?>
+
+        <div class="row-fluid">
+            <div class="span2 row">
+                <div class="well ">
+                    <div style="text-align: center">
+                        <a href="/login">Login</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row span10">
+                 <h2><?= title ?></h2>
+                 <?- body ?>
+            </div>
         </div>
+    </div>
   </body>
 </html>

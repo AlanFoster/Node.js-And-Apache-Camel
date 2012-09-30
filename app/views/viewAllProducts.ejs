@@ -8,21 +8,19 @@
         <th>Description</th>
         <th>Price</th>
         <th>Details</th>
+        <th>Order</th>
     </tr>
     </thead>
+    <? products.forEach(function(product) { ?>
+        <tr>
+            <td><?= product.id ?></td>
+            <td><?= product.name ?></td>
+            <td><?= product.description ?></td>
+            <td><?= product.price ?></td>
+            <td><a href="#">View more details</a></td>
+            <td><a href="#">Add To Cart</a></td>
+        </tr>
+    <? }); ?>
     <tbody>
-    <tr>
-        <td>1</td>
-        <td>Cheese</td>
-        <td>The finest cheese ever</td>
-        <td>£1.50</td>
-        <td><a href="#">View More Details</a></td>
-    </tr>
-    <tr>
-        <td>2</td>
-        <td>Beer</td>
-        <td>Lovely beer</td>
-        <td>£2.20</td>
-        <td><a href="#">View More Details</a></td>
-    </tr>
+
 </table>
