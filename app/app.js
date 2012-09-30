@@ -39,18 +39,13 @@ app.configure("production", function(){
   app.use(express.errorHandler());
 });
 
-// User
-app.use(function(req, res, next){
-  //  res.locals.user = req.user;
-    next();
-});
-
 // Routes
 
 app.get("/", routes.index.handle);
 app.get("/viewAllProducts", routes.viewAllProducts.handle);
 app.get("/login", routes.viewLogin.handle);
 app.get("/shoppingCart", routes.shoppingCart.handle);
+app.get("/logout", routes.logout.handle);
 
 app.post("/validateLogin", routes.validateLogin.handle);
 
