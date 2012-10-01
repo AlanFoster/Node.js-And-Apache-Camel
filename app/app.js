@@ -34,6 +34,9 @@ app.configure(function(){
 app.dynamicHelpers({
     user : function(req, res) {
         return req.session.user;
+    },
+    shoppingCart : function(req, res) {
+        return req.session.shoppingCart;
     }
 })
 
@@ -60,7 +63,7 @@ app.get("/", routes.index.handle);
 app.get("/viewAllProducts", routes.viewAllProducts.handle);
 app.get("/login", routes.viewLogin.handle);
 app.get("/login/redirect", routes.viewLogin.handle);
-app.get("/shoppingCart", routes.shoppingCart.handle);
+app.get("/shoppingCart", requiresLogin, routes.shoppingCart.handle);
 app.get("/logout", routes.logout.handle);
 app.get("/products/add/:id", requiresLogin, routes.addProduct.handle);
 

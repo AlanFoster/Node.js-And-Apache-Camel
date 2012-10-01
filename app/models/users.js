@@ -21,8 +21,9 @@ var getUserById = exports.getUserById = function getUserById(id, callback) {
     callback(undefined, matchingUser);
 };
 
-// This will be a lot simpler with a real database as it currently mimics an inefficient join function
-exports.getFullShoppingCart = function(id, callback) {
+// This will be a lot simpler with a real (relational) database
+// as it currently mimics an inefficient join function
+var getFullShoppingCart = exports.getFullShoppingCart = function(id, callback) {
     getUserById(id, function(err, user) {
         var ids = _.map(user.shoppingCartDetails, function(product) { return product.id; });
         products.getProductsByIds(ids, function(err, items) {
@@ -44,6 +45,9 @@ exports.addProduct = function(userId, productId, callback) {
         } else {
             existingItem.quantity++;
         }
-        callback(undefined);
+
+        getFullShoppingCart(userId, function(err, shoppingCart) {
+            callback(undefined, shoppingCart);
+        });
     })
 };

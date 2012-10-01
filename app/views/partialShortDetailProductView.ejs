@@ -1,0 +1,7 @@
+<? if(shoppingCart && shoppingCart.length > 0) { ?>
+        <? shoppingCart.forEach(function(product, index) { ?>
+            <div><?= index + 1 ?> . <?= product.name ?> x <?= product.quantity ?></div>
+        <? }); ?>
+<? } else { ?>
+    <i>There are no products to display</i>
+<? } ?>

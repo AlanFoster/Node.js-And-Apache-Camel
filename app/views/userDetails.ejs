@@ -1,6 +1,9 @@
 <? if(typeof user !== 'undefined'){ ?>
-    <p>Welcome <em><?= user.email ?></em></p>
-    <p><a href="/shoppingCart">View shopping cart</a></p>
+    <p>Welcome back <em><?= user.email ?></em>!</p>
+    <p>Shopping cart summary : </p>
+    <?- partial("partialShortDetailProductView", { products : user.shoppingCart }) ?>
+    <br />
+    <p><a href="/shoppingCart">View Full Shopping cart</a></p>
     <div style="text-align: center">
         <a href="/logout">Log out</a>
     </div>

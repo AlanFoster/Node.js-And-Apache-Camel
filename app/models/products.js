@@ -16,7 +16,6 @@ exports.getProductById = function(id, callback) {
 };
 
 exports.getProductsByIds = function(ids, callback) {
-    console.log(ids);
     var items = _.filter(products, function(product) {
         return ids.indexOf(product.id) !== -1;
     });

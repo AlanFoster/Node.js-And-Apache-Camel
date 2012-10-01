@@ -17,9 +17,14 @@ exports.validateLogin = {
                 // Wouldn't do this in a real app
                 req.session.user = user;
                 req.session.userId  = user.id;
+                users.getFullShoppingCart(user.id, function(err, shoppingCart) {
+                    req.session.shoppingCart = shoppingCart;
+                    res.json({"loginSuccess" : true});
+                });
+                return;
             }
 
-            res.json({"loginSuccess" : loginSuccess});
+            res.json({"loginSuccess" : false});
         });
     }
 };
@@ -27,18 +32,7 @@ exports.validateLogin = {
 exports.shoppingCart  = {
     menuName : "shopping cart",
     handle : function(req, res) {
-        users.getUserById(req.session.userId, function(err, user) {
-            if(!user) {
-                res.redirect("/login");
-                return;
-            }
-            users.getFullShoppingCart(user.id, function(err, shoppingCart) {
-                res.render("shoppingCart", {
-                    title : "Shopping Cart",
-                    shoppingCart : shoppingCart
-                });
-            })
-        });
+        res.render("shoppingCart", { title : "Shopping Cart" });
     }
 };
 

@@ -1,30 +1,3 @@
 <p>Welcome <em><?= user.email ?></em> to your shopping card</p>
-
-<? if(shoppingCart && shoppingCart.length > 0) { ?>
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>#</th>
-            <th>Product Name</th>
-            <th>Description</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Total Cost</th>
-            <th>Remove</th>
-        </tr>
-        </thead>
-        <? shoppingCart.forEach(function(product) { ?>
-        <tr>
-            <td><?= product.id ?></td>
-            <td><?= product.name ?></td>
-            <td><?= product.description ?></td>
-            <td>£<?= product.price ?></td>
-            <th><?= product.quantity ?></th>
-            <th>£<?= product.quantity  * parseInt(product.price, 0) ?></th>
-            <td><a href="#">Remove From Cart</a></td>
-        </tr>
-        <? }); ?>
-    </table>
-<? } else { ?>
-    <i>You currently have no shopping cart</i>
-<? } ?>
+<?= user.shoppingCart ?>
+<?- partial("partialFullDetailProductView", { products : user.shoppingCart }) ?>

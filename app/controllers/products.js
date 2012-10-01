@@ -11,7 +11,8 @@ var  viewAllProducts = exports.viewAllProducts = {
 exports.addProduct = {
     handle : function(req, res) {
         var productId = parseInt(req.param("id"));
-        users.addProduct(req.session.userId, productId, function(err) {
+        users.addProduct(req.session.userId, productId, function(err, newShoppingCart) {
+            req.session.shoppingCart = newShoppingCart;
             viewAllProducts.handle(req, res);
         });
     }
