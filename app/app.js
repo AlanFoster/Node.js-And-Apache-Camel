@@ -31,6 +31,10 @@ app.configure(function(){
   app.use(express.static(__dirname + "/public"));
 });
 
+app.dynamicHelpers({ user : function(req, res) {
+    return req.session.user;
+}})
+
 app.configure("development", function(){
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
@@ -46,6 +50,7 @@ app.get("/viewAllProducts", routes.viewAllProducts.handle);
 app.get("/login", routes.viewLogin.handle);
 app.get("/shoppingCart", routes.shoppingCart.handle);
 app.get("/logout", routes.logout.handle);
+app.post("/", routes.validateLogin.handle);
 
 app.post("/validateLogin", routes.validateLogin.handle);
 

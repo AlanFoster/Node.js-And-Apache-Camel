@@ -18,7 +18,7 @@
         <td><?= product.description ?></td>
         <td>£<?= product.price ?></td>
         <td><a href="#">View more details</a></td>
-        <td><a href="#">Add To Cart</a></td>
+        <td><a href="/products/add/<?= product.id ?>">Add To Cart</a></td>
     </tr>
     <? }); ?>
 </table>

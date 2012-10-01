@@ -35,7 +35,6 @@ exports.shoppingCart  = {
             users.getFullShoppingCart(user.id, function(err, shoppingCart) {
                 res.render("shoppingCart", {
                     title : "Shopping Cart",
-                    user : user,
                     shoppingCart : shoppingCart
                 });
             })
