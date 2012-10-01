@@ -3,7 +3,7 @@ var _ = require("underscore"),
 
 // Obviously we wouldn't store names/passwords like this, and we'd use a database
 var users = exports.users = [
-    {id : 1, email : "foo", password : "bar", shoppingCartDetails : [{id : 1, quantity : 5}, {id : 2, quantity : 3}]},
+    {id : 1, email : "foo", password : "bar", shoppingCartDetails : []},
     {id : 2, email : "baz", password : "qux", shoppingCartDetails : [{id : 2, quantity : 3}]}
 ];
 
@@ -44,6 +44,25 @@ exports.addProduct = function(userId, productId, callback) {
             shoppingCart.push({id : productId, quantity : 1});
         } else {
             existingItem.quantity++;
+        }
+
+        getFullShoppingCart(userId, function(err, shoppingCart) {
+            callback(undefined, shoppingCart);
+        });
+    })
+};
+
+exports.removeProduct = function(userId, productId, callback) {
+    getUserById(userId, function(err, user) {
+        var shoppingCart = user.shoppingCartDetails;
+        var existingItem = _.find(shoppingCart, function(product) { return product.id == productId; });
+        if(!existingItem) {
+            // Ignore for now
+        } else {
+            existingItem.quantity--;
+            if(existingItem.quantity <= 0){
+                user.shoppingCartDetails.splice(shoppingCart.indexOf(existingItem), 1);
+            }
         }
 
         getFullShoppingCart(userId, function(err, shoppingCart) {

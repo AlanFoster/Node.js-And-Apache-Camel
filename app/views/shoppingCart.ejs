@@ -1,3 +1,5 @@
 <p>Welcome <em><?= user.email ?></em> to your shopping card</p>
-<?= user.shoppingCart ?>
+
 <?- partial("partialFullDetailProductView", { products : user.shoppingCart }) ?>
+
+<p><i>Click <a href="/viewAllProducts">here</a> to see all of our products!</i></p>

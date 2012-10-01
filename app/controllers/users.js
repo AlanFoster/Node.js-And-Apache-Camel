@@ -44,3 +44,13 @@ exports.logout = {
         res.redirect("/login");
     }
 };
+
+exports.removeProduct = {
+    handle : function(req, res) {
+        var productId = parseInt(req.param("id"));
+        users.removeProduct(req.session.userId, productId, function(err, newShoppingCart) {
+           req.session.shoppingCart = newShoppingCart;
+           res.redirect("/shoppingCart");
+        });
+    }
+}

@@ -66,6 +66,7 @@ app.get("/login/redirect", routes.viewLogin.handle);
 app.get("/shoppingCart", requiresLogin, routes.shoppingCart.handle);
 app.get("/logout", routes.logout.handle);
 app.get("/products/add/:id", requiresLogin, routes.addProduct.handle);
+app.get("/products/remove/:id", requiresLogin, routes.removeProduct.handle);
 
 app.post("/validateLogin", routes.validateLogin.handle);
 
