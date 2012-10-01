@@ -38,7 +38,7 @@ exports.getFullShoppingCart = function(id, callback) {
 exports.addProduct = function(userId, productId, callback) {
     getUserById(userId, function(err, user) {
         var shoppingCart = user.shoppingCartDetails;
-        var existingItem = _.find(shoppingCart, function(product) { return product.id = productId; });
+        var existingItem = _.find(shoppingCart, function(product) { return product.id == productId; });
         if(!existingItem) {
             shoppingCart.push({id : productId, quantity : 1});
         } else {

@@ -1,6 +1,7 @@
-<script src="js/login.js"></script>
+<script src="/js/login.js"></script>
 
 <form id="loginForm" class="form-horizontal">
+    <input type="hidden" name="redir" id="redir" value="<?= redir ?>" />
     <div class="alert alert-error hide" id="invalidLogin" >
         <strong>Error!</strong> The supplied credentials were invalid!
     </div>

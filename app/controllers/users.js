@@ -3,8 +3,8 @@ var products = require("../models/products"),
 
 exports.viewLogin = {
     menuName : "Login",
-    handle : function(req, res){
-        res.render("login", { title: "Login", user : req.session.user })
+    handle : function(req, res) {
+        res.render("login", { title: "Login", user : req.session.user, redir : req.param("redir", "/shoppingCart") })
     }
 };
 

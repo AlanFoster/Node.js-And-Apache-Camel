@@ -31,9 +31,11 @@ app.configure(function(){
   app.use(express.static(__dirname + "/public"));
 });
 
-app.dynamicHelpers({ user : function(req, res) {
-    return req.session.user;
-}})
+app.dynamicHelpers({
+    user : function(req, res) {
+        return req.session.user;
+    }
+})
 
 app.configure("development", function(){
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
@@ -43,14 +45,24 @@ app.configure("production", function(){
   app.use(express.errorHandler());
 });
 
+// Middleware for requiring a login
+function requiresLogin(req, res, next){
+    if(req.session.user) {
+        next();
+    } else {
+        res.redirect("/login/redirect?redir=" + req.url);
+    }
+}
+
 // Routes
 
 app.get("/", routes.index.handle);
 app.get("/viewAllProducts", routes.viewAllProducts.handle);
 app.get("/login", routes.viewLogin.handle);
+app.get("/login/redirect", routes.viewLogin.handle);
 app.get("/shoppingCart", routes.shoppingCart.handle);
 app.get("/logout", routes.logout.handle);
-app.post("/", routes.validateLogin.handle);
+app.get("/products/add/:id", requiresLogin, routes.addProduct.handle);
 
 app.post("/validateLogin", routes.validateLogin.handle);
 
