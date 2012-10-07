@@ -1,15 +1,13 @@
 var steps = function() {
-    this.World = require("features/world.js").World;
-    var browser = this.browser;
+    this.World = require("../support/world.js").World;
     var assert = require("assert");
 
     this.Given("I am on the home page", function(callback) {
-        browser.visit("http://localhost:3000/", callback);
+        this.browser.visit("http://localhost:3000/", callback);
     });
 
     this.Given("the title says '$expectedTitle'", function(expectedTitle, callback) {
-        var title = browser.text("h2");
-        console.log("header :: ", title);
+        var title = this.browser.text("h2");
         assert.equal(title, expectedTitle);
         callback();
     });
@@ -17,6 +15,6 @@ var steps = function() {
     this.Then("I shall be happy", function(callback){
         callback();
     });
-}
+};
 
 exports.steps = steps;
