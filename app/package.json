@@ -1,14 +1,19 @@
 {
-    "name": "app",
+    "name": "test shopping cart app",
     "version": "0.0.1",
     "private": true,
-    "dependencies": {
+    "scripts" : {
+        "test" : "./nodule_modules/.bin/cucumber.js test/features/"
+    },
+    "dependencies" : {
       "express": "2.5.11",
       "ejs": ">= 0.0.1",
       "underscore" : "*",
+   }, 
+   "devDependencies" : {
       "nock" : "*",
       "cucumber": "latest",
       "assert" : "latest",
       "zombie" : "latest"
-  }
+    }
 }
