@@ -17,4 +17,4 @@ var steps = function() {
     });
 };
 
-exports.steps = steps;
+module.exports = steps;
