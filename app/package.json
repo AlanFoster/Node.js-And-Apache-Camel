@@ -1,19 +1,22 @@
 {
-    "name": "test-app",
-    "version": "0.0.1",
-    "private": true,
-    "scripts" : {
-        "test" : "./node_modules/.bin/cucumber.js test/features/"
+    "name":"test-app",
+    "version":"0.0.1",
+    "private":true,
+    "scripts":{
+        "test":"./node_modules/.bin/cucumber.js test/features/"
     },
-    "dependencies" : {
-        "express": "2.5.11",
-        "ejs": ">= 0.0.1",
-        "underscore" : "*"
+    "dependencies":{
+        "express":"2.5.11",
+        "ejs":">= 0.0.1",
+        "underscore":"*"
     },
-    "devDependencies" : {
-        "nock" : "*",
-        "cucumber": "latest",
-        "assert" : "latest",
-        "zombie" : "latest"
+    "devDependencies":{
+        "nodeunit" : "*",
+        "mocha":"*",
+        "nock":"*",
+        "cucumber":"latest",
+        "assert":"latest",
+        "zombie":"latest",
+        "html5":"latest"
     }
 }
