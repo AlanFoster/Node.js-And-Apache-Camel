@@ -16,17 +16,19 @@ For this project the core dependencies are as follows
 Deploying this application is extremely easy as currently there are no external dependencies being used
 (other than node.js modules)
 
-    npm install app.json
+    cd app
+    npm install
+    node app.json
 
 ##Testing##
 
 For testing I am looking into writing behaviour tests using the gherkin syntax.
 
-For testing I am using this modules
+The core modules used for testing are as follows
 
 - Cucumber.js
 - Zombie.js
 
-You can run the tests for this project with
+You can run the tests for this project with. Ensure the application is running prior to running these tests
 
     npm test
