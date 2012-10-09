@@ -17,7 +17,7 @@ Feature: View website
     When I click the 'Login' link
     Then I will be taken to the 'Login' page
     When I log in with the following details
-      | Email    | foo   |
-      | Password | bar   |
+      | email | password |
+      | foo   | bar      |
     Then I will be taken to the 'Shopping Cart' page
     And the page says 'Welcome foo to your shopping card Empty Shopping Cart'

@@ -1,6 +1,7 @@
 var steps = function() {
     this.World = require("../support/world.js").World;
     var assert = require("../helpers/assert");
+    var _ = require("underscore");
 
     this.Given("the application is running", function(callback) {
        this.browser.visit("http://localhost:3000/")
@@ -12,29 +13,19 @@ var steps = function() {
 
         browser.visit("http://localhost:3000/")
             .then(function() {
-                var loginElement =  browser.query("#login");
-                assert.assertNotNull(loginElement);
-
-                var loginElementText = loginElement.querySelector("a").textContent;
-                assert.assertEquals("Login", loginElement.querySelector("a").textContent);
-            })
-            .then(callback);
+                assert.assertEquals("Login", browser.text("#login a"));
+                callback();
+            });
     });
-
-    this.Then("I will be logged in", function(callback) {
-        callback();
-    });
-
 
     this.When("I log in with the following details", function(details, callback) {
-        var browser = this.browser;
-        var email = details.raw()["email"];
-        var password = details.raw()["password"];
+        var email = details.hashes()[0]["email"];
+        var password = details.hashes()[0]["password"];
 
-        // TODO See why 'email' doesn't work by itself
-        browser
-            .fill("#email", "foo")
-            .fill("#password", "bar")
+        // TODO See why 'email' doesn't work by itself and why I need to specify the id
+        this.browser
+            .fill("#email", email)
+            .fill("#password", password)
             .pressButton("Sign in", callback);
     })
 };

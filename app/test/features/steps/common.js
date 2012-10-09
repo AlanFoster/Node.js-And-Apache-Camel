@@ -4,7 +4,6 @@ var steps = function() {
     var _ = require("underscore");
 
     this.Given("I am on the home page", function(callback) {
-        console.log("visiting home page");
         this.browser.visit("http://localhost:3000/", callback);
     });
 
@@ -15,6 +14,8 @@ var steps = function() {
     });
 
     this.Then("I shall be happy", function(callback){
+        var happy = true;
+        assert.assertTrue(happy);
         callback();
     });
 
