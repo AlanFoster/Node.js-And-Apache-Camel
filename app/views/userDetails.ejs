@@ -4,11 +4,11 @@
     <?- partial("partialShortDetailProductView", { products : user.shoppingCart }) ?>
     <br />
     <p><a href="/shoppingCart">View Full Shopping cart</a></p>
-    <div style="text-align: center">
+    <div style="text-align: center" id="login">
         <a href="/logout">Log out</a>
     </div>
 <? } else { ?>
-    <div style="text-align: center">
+    <div style="text-align: center" id="login">
         <a href="/login">Login</a>
     </div>
 <? } ?>

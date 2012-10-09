@@ -14,10 +14,10 @@ Feature: View website
   Scenario: Logging in
     Given I am not logged in
     And I am on the home page
+    When I click the 'Login' link
+    Then I will be taken to the 'Login' page
     When I log in with the following details
-      | Name     | Value |
-      | email    | foo   |
-      | password | bar   |
-    Then I will be logged in
-    And the page says 'welcome foo to your shopping cart'
-    And I shall be happyl
+      | Email    | foo   |
+      | Password | bar   |
+    Then I will be taken to the 'Shopping Cart' page
+    And the page says 'Welcome foo to your shopping card Empty Shopping Cart'
