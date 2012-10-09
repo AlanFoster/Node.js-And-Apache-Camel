@@ -3,6 +3,9 @@ Feature: View website
   I want to see what products are available
   So that I can add items to my shopping cart
 
+  Background:
+    Given the application is running
+
   Scenario: View Homepage
     Given I am on the home page
     And the title says 'Home'
@@ -15,6 +18,6 @@ Feature: View website
       | Name     | Value |
       | email    | foo   |
       | password | bar   |
-
     Then I will be logged in
-    And I shall be happy
+    And the page says 'welcome foo to your shopping cart'
+    And I shall be happyl

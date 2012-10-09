@@ -15,7 +15,6 @@
         "mocha":"*",
         "nock":"*",
         "cucumber":"latest",
-        "assert":"latest",
         "zombie":"latest",
         "html5":"latest"
     }
