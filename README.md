@@ -5,7 +5,7 @@ Node.js-Test
 
 Simple shopping cart application that allows users to log in and add/remove items to a shopping cart
 
-#Dependencies#
+##Dependencies##
 
 For this project I'm trying a new technology set;
 
@@ -13,7 +13,7 @@ For this project I'm trying a new technology set;
 - express.js
 - ejs
 
-#Testing#
+##Testing##
 
 For testing I am looking into writing behaviour tests using the gherkin syntax.
 
