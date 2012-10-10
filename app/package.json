@@ -3,7 +3,7 @@
     "version":"0.0.1",
     "private":true,
     "scripts":{
-        "test":"./node_modules/.bin/cucumber.js test/features/ -f pretty"
+        "test":"DEBUG_LEVEL=5 ./node_modules/.bin/cucumber.js test/features/ -f pretty"
     },
     "dependencies":{
         "express":"2.5.11",
