@@ -45,7 +45,7 @@
     </wsdl:binding>
     <wsdl:service name="TestService">
         <wsdl:documentation>Test service Wsdl</wsdl:documentation>
-        <wsdl:port name="testServicePort" binding="tns:TestServiceBinding">
+        <wsdl:port name="TestServicePort" binding="tns:TestServiceBinding">
             <soap:address location="http://foo.bar"/>
         </wsdl:port>
     </wsdl:service>
