@@ -3,11 +3,6 @@ var steps = function() {
     var assert = require("../helpers/assert");
     var _ = require("underscore");
 
-    this.Given("the application is running", function(callback) {
-       this.browser.visit("http://localhost:3000/")
-           .then(callback);
-    });
-
     this.Given("I am not logged in", function(callback) {
         var browser = this.browser;
 

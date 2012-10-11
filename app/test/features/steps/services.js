@@ -1,14 +1,16 @@
 var steps = function() {
     this.World = require("../support/world.js").World;
     var assert = require("../helpers/assert");
-    var fs = require("fs");
     var _ = require("underscore");
-    // TODO
-    var wsdlLocation = "/home/a/Downloads/Node.js-Test/app/services/wsdl/TestWsdl.wsdl";
-    var http = require("http");
 
+    var fs = require("fs");
+    var http = require("http");
     var request = require("request");
     var soap = require("soap");
+
+
+    var wsdlLocation = "/home/a/Downloads/Node.js-Test/app/services/wsdl/TestWsdl.wsdl";
+
     var port = 10000;
 
 
@@ -22,20 +24,30 @@ var steps = function() {
         }
     };
 
-    this.Given("there is a mocked soap service running on port '10000'", function(callback) {
-        var wsdl = fs.readFileSync(wsdlLocation, 'utf8'),
-            server = http.createServer(function(req, res) {
-                res.statusCode = 404;
-                res.end();
-            });
-        server.listen(port);
-        soap.listen(server, '/TestService', TestService, wsdl);
+    this.Given("there is a mocked soap service running on port '$portNumber'", function(portNumber, callback) {
+        port = portNumber;
+        var server = http.createServer(function(req, res) {
+            res.statusCode = 404;
+            res.end();
+        });
 
-        // Assert it is running
+        server.listen(port);
+
+        // Assert the server is running
         request("http://localhost:" + port, function(err, res, body) {
             assert.assertTrue(!err, "Expected no error in calling soap server");
             callback();
         })
+        // Store the server in the cucumber context so that other steps can access the object
+        this.server = server;
+    });
+
+
+    this.Given("there is a basic mock service running", function(callback) {
+        var server = this.server;
+        var wsdl = fs.readFileSync(wsdlLocation, 'utf8');
+        soap.listen(server, '/TestService', TestService, wsdl);
+        callback();
     });
 
     this.Given("there is a valid generated wsdl", function(callback) {
