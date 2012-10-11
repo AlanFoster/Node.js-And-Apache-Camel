@@ -5,7 +5,7 @@ Feature: Test Soap Service
 
 
   Scenario: Testing Waters
-    Given there is a mocked soap service running on port '15099'
+    Given there is a mocked soap service running on port '10000'
     And there is a valid generated wsdl
     When I call the 'GetProduct' soap service with the product id '123'
     Then I get valid product details back

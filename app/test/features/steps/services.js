@@ -16,33 +16,33 @@ var steps = function() {
         TestService : {
             TestServicePort : {
                 GetProduct : function(args) {
-                    return { ProductId : "123", price: 1.00 };
+                    return { ProductId : "123", Price: 1.00 };
                 }
             }
         }
-    }
+    };
 
-    this.Given("there is a mocked soap service running on port '15099'", function(callback) {
+    this.Given("there is a mocked soap service running on port '10000'", function(callback) {
         var wsdl = fs.readFileSync(wsdlLocation, 'utf8'),
             server = http.createServer(function(req, res) {
                 res.statusCode = 404;
                 res.end();
             });
         server.listen(port);
-        soap.listen(server, '/testService', TestService, wsdl);
+        soap.listen(server, '/TestService', TestService, wsdl);
 
         // Assert it is running
         request("http://localhost:" + port, function(err, res, body) {
-            assert.assertTrue(!err);
+            assert.assertTrue(!err, "Expected no error in calling soap server");
             callback();
         })
     });
 
     this.Given("there is a valid generated wsdl", function(callback) {
-        request("http://localhost:" + port + "/testService?wsdl", function(err, res, body) {
-            assert.assertTrue(!err);
-            assert.assertEquals(res.statusCode, 200);
-            assert.assertTrue(body.length > 0);
+        request("http://localhost:" + port + "/TestService?wsdl", function(err, res, body) {
+            assert.assertTrue(!err, "Expected no error in calling generated wsdl");
+            assert.assertEquals(res.statusCode, 200, "expect 200 status response");
+            assert.assertTrue(body.length > 0, "expected a wsdl body");
 
             callback();
         })
@@ -50,12 +50,10 @@ var steps = function() {
 
     this.When("I call the 'GetProduct' soap service with the product id '123'", function(callback) {
         var self = this;
-        soap.createClient("http://localhost:" + port + "/testService?wsdl", function(err, client) {
-            assert.assertTrue(!err);
-            //ProductId : "123"
-            client.GetProduct({ }, function(err, result) {
-                //assert.assertTrue(!err);
-                console.log(result);
+        soap.createClient("http://localhost:" + port + "/TestService?wsdl", function(err, client) {
+            assert.assertTrue(!err, "expected to create a client succesfully");
+            client.GetProduct({ ProductId : "123" }, function(err, result) {
+                assert.assertTrue(!err, "Expected no error from GetProduct call");
                 self.productDetailsResponse = result;
                 callback();
             });
@@ -64,8 +62,8 @@ var steps = function() {
 
     this.Then("I get valid product details back", function(callback) {
         var result = this.productDetailsResponse;
-        assert.assertEquals("123", result.price);
-        assert.assertEquals(1.00, parseFloat(result.price));
+        assert.assertEquals("123", result.ProductId);
+        assert.assertEquals(1.00, parseFloat(result.Price));
         callback();
     });
 };
