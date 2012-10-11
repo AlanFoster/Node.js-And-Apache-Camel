@@ -12,7 +12,7 @@ var steps = function() {
     });
 
     this.Given("I am on the home page", function(callback) {
-        browser.visit("http://localhost:3000/", callback);
+       this.browser.visit("http://localhost:3000/", callback);
     });
 
     this.Given("the title says '$expectedTitle'", function(expectedTitle, callback) {

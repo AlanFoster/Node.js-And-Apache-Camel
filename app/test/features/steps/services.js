@@ -78,6 +78,18 @@ var steps = function() {
         assert.assertEquals(1.00, parseFloat(result.Price));
         callback();
     });
+
+
+    this.When("I test cucumber.js with the following json", function(multiline, callback) {
+        this.jsonObject = JSON.parse(multiline);
+        callback();
+    });
+
+    this.Then("the key foo shall equal bar", function(callback) {
+        var jsonObject = this.jsonObject;
+        assert.assertEquals(jsonObject["foo"], "bar", "the key foo should equal bar");
+        callback();
+    });
 };
 
 module.exports = steps;

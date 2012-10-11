@@ -11,8 +11,16 @@ Feature: Test Soap Service
     When I call the 'GetProduct' soap service with the product id '123'
     Then I get valid product details back
 
-  #Scenario: More indepth configurable soap mocks/consuming
-  #  Given there is a mocked soap service running on port '10000'
-  #  And there is a valid generated wsdl
-   # When I call the 'GetProduct' soap service with the product id '123'
-  #  Then I get valid product details back
+
+  Scenario: More indepth configurable soap mocks/consuming
+
+
+
+  Scenario: Testing using json in steps
+    When I test cucumber.js with the following json
+      """
+        {
+          "foo" : "bar"
+        }
+      """
+    Then the key foo shall equal bar
