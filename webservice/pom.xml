@@ -3,13 +3,13 @@
 
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>me.alanfoster</groupId>
-  <artifactId>shoppingcart-webservice</artifactId>
-  <packaging>bundle</packaging>
+  <groupId>me.alanfoster.tests</groupId>
+  <artifactId>shoppingcart</artifactId>
+  <packaging>pom</packaging>
   <version>1.0.0-SNAPSHOT</version>
 
-  <name>A Camel Blueprint Route</name>
-  <url>http://www.myorganization.org</url>
+  <name>Shopping Cart</name>
+  <url>http://www.alanfoster.me</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -18,10 +18,14 @@
     <camel.version>2.9.0.fuse-70-097</camel.version>
     <cxf.version>2.5.0.fuse-7-061</cxf.version>
     <java.version>1.6</java.version>
-    <wsdl.location>${basedir}/src/main/resources/wsdl/ShoppingCart.wsdl</wsdl.location>
   </properties>
 
- <repositories>
+  <modules>
+    <module>service</module>
+    <module>service-impl</module>
+  </modules>
+
+  <repositories>
     <repository>
       <id>release.fusesource.org</id>
       <name>FuseSource Release Repository</name>
@@ -107,35 +111,34 @@
     </dependency>
     
     <!--  Cxf dependency for webservices -->
-	<dependency>
-		<groupId>org.apache.cxf</groupId>
-		<artifactId>cxf-rt-transports-http-jetty</artifactId>
-		<version>2.5.0.fuse-7-061</version>
-	</dependency>
-	<dependency>
-		<groupId>org.apache.camel</groupId>
-		<artifactId>camel-cxf</artifactId>
-		<version>2.9.0.fuse-7-061</version>
-		<type>bundle</type>
-	</dependency>
-	<dependency>
-		<groupId>org.apache.camel</groupId>
-		<artifactId>camel-http</artifactId>
-		<version>2.9.0.fuse-7-061</version>
-		<type>bundle</type>
-	</dependency>
-	<dependency>
-		<groupId>org.apache.camel</groupId>
-		<artifactId>camel-soap</artifactId>
-		<version>2.9.0.fuse-7-061</version>
-		<type>bundle</type>
-	</dependency>
-	<dependency>
-		<groupId>org.apache.cxf</groupId>
-		<artifactId>cxf-rt-bindings-soap</artifactId>
-		<version>2.5.0.fuse-7-061</version>
-	</dependency>
-	
+    <dependency>
+        <groupId>org.apache.cxf</groupId>
+        <artifactId>cxf-rt-transports-http-jetty</artifactId>
+        <version>2.5.0.fuse-7-061</version>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-cxf</artifactId>
+        <version>${camel.version}</version>
+        <type>bundle</type>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-http</artifactId>
+        <version>${camel.version}</version>
+        <type>bundle</type>
+    </dependency>
+     <dependency>
+         <groupId>org.apache.camel</groupId>
+         <artifactId>camel-soap</artifactId>
+         <version>${camel.version}</version>
+         <type>bundle</type>
+     </dependency>
+     <dependency>
+         <groupId>org.apache.cxf</groupId>
+         <artifactId>cxf-rt-bindings-soap</artifactId>
+         <version>2.5.0.fuse-7-061</version>
+     </dependency>
 
     <!-- logging -->
     <dependency>
@@ -159,21 +162,6 @@
       <version>1.2.16</version>
     </dependency>
 
-    <!-- testing -->
-    <dependency>
-      <groupId>org.apache.camel</groupId>
-      <artifactId>camel-test-blueprint</artifactId>
-      <version>2.9.0.fuse-70-097</version>
-      <scope>test</scope>
-    </dependency>
-	
-	<dependency>
-		<groupId>junit</groupId>
-		<artifactId>junit</artifactId>
-		<version>4.10</version>
-		<scope>test</scope>
-	</dependency>
-    
   </dependencies>
 
   <build>
@@ -190,53 +178,7 @@
           <target>${java.version}</target>
         </configuration>
       </plugin>
-
-      <!-- generate the MANIFEST-FILE of the bundle -->
-      <plugin>
-        <groupId>org.apache.felix</groupId>
-        <artifactId>maven-bundle-plugin</artifactId>
-        <version>2.3.4</version>
-        <extensions>true</extensions>
-        <configuration>
-          <instructions>
-            <Bundle-SymbolicName>${project.groupId}.${project.artifactId}.${project.version}</Bundle-SymbolicName>
-            <Private-Package>me.alanfoster.shoppingcart.webservice.*</Private-Package>									
-            <Import-Package>
-            	*,
-            	org.apache.camel.osgi
-           	</Import-Package>
-          </instructions>
-        </configuration>
-      </plugin>
-
-	<!-- Generate Java proxy classes for our web service -->
-	<plugin>
-		<groupId>org.apache.cxf</groupId>
-		<artifactId>cxf-codegen-plugin</artifactId>
-		<version>${cxf.version}</version>
-		<executions>
-			<execution>
-				<id>generate-sources</id>
-				<phase>generate-sources</phase>
-				<configuration>
-					<sourceRoot>${project.build.directory}/generated/cxf</sourceRoot>
-					<wsdlOptions>
-						<wsdlOption>
-							<wsdl>${wsdl.location}</wsdl>
-						<!-- 	<extraargs>
-								<extraarg>-verbose</extraarg>
-								<extraarg>-compile</extraarg>
-								<extraarg>-validate</extraarg>
-							</extraargs> -->
-						</wsdlOption>
-					</wsdlOptions>
-				</configuration>
-				<goals>
-					<goal>wsdl2java</goal>
-				</goals>
-			</execution>
-		</executions>
-	</plugin>
     </plugins>
   </build>
 </project>
+

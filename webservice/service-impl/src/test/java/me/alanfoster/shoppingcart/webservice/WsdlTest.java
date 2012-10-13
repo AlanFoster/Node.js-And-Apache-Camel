@@ -1,6 +1,7 @@
 package me.alanfoster.shoppingcart.webservice;
 
 import org.junit.Test;
+import org.omg.CORBA.OMGVMCID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,6 +20,6 @@ public class WsdlTest {
     public void testException() throws Exception {
         logger.info("Pass");
         assertTrue(false);
-    }
+     }
 
 }

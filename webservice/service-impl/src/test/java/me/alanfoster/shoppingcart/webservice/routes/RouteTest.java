@@ -2,6 +2,7 @@ package me.alanfoster.shoppingcart.webservice.routes;
 
 import org.apache.camel.test.blueprint.CamelBlueprintTestSupport;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class RouteTest extends CamelBlueprintTestSupport {
@@ -11,6 +12,7 @@ public class RouteTest extends CamelBlueprintTestSupport {
         return "/OSGI-INF/blueprint/ShoppingCartWebservice.xml";
     }
 
+    @Ignore
     @Test
     public void testRoute() throws Exception {
    
@@ -20,6 +22,8 @@ public class RouteTest extends CamelBlueprintTestSupport {
 
         // assert expectations
         assertMockEndpointsSatisfied();*/
+    	
+    	
     }
 
 }
