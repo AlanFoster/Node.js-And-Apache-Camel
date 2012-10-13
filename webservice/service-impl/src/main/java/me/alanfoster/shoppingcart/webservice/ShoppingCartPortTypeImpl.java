@@ -1,8 +1,11 @@
 package me.alanfoster.shoppingcart.webservice;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
-import java.util.logging.Logger;
+
+import org.apache.log4j.Logger;
 
 import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.GetProductRequest;
 import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.Product;
@@ -10,16 +13,25 @@ import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.ShoppingCartPortType;
 
 public class ShoppingCartPortTypeImpl implements ShoppingCartPortType {
 
-    private static final Logger LOG = Logger.getLogger(ShoppingCartPortTypeImpl.class.getName());
+    private static final Logger logger = Logger.getLogger(ShoppingCartPortTypeImpl.class);
 
     /**
      * ProductId mapping to Product
      */
-    private static Map<String, Product> products;
+    private Map<String, Product> products;
     
-    static {
+    public ShoppingCartPortTypeImpl() {
     	products = new HashMap<String, Product>();
-        
+    }
+    
+    protected List<Product> getProducts() {
+    	return new LinkedList<Product>(products.values());
+    }
+    
+    public void setProducts(List<Product> products) {
+    	for(Product product : products) {
+    		this.products.put(product.getProductId(), product);
+    	}
     }
     
     /* (non-Javadoc)
@@ -27,11 +39,8 @@ public class ShoppingCartPortTypeImpl implements ShoppingCartPortType {
      */
 	@Override
 	public Product getProduct(GetProductRequest body) {
-        LOG.info("Executing operation getProduct");
-        System.out.println(body);
+		logger.info("Executing operation getProduct");
         
-        String productId = body.getProductId();
-        
-        return null;
+        return products.get(body.getProductId());
     }
 }
