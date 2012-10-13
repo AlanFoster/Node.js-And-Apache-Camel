@@ -34,7 +34,9 @@
               </xs:complexType>
             </xs:element>
 
-          <xs:element name="GetAllProductsRequest" />
+          <xs:element name="GetAllProductsRequest" >
+              <xs:complexType />
+          </xs:element>
 
           <xs:element name="GetAllProductsResponse">
               <xs:complexType>

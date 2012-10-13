@@ -7,10 +7,12 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
+import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.GetAllProductsRequest;
 import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.GetAllProductsResponse;
 import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.GetProductRequest;
 import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.GetProductResponse;
 import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.ProductType;
+import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.ProductsType;
 import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.ShoppingCartPortType;
 
 public class ShoppingCartPortTypeImpl implements ShoppingCartPortType {
@@ -36,9 +38,6 @@ public class ShoppingCartPortTypeImpl implements ShoppingCartPortType {
     	}
     }
     
-    /* (non-Javadoc)
-     * @see me.alanfoster.ShoppingCartPortType#getProduct(me.alanfoster.GetProductRequest  body )*
-     */
 	@Override
 	public GetProductResponse getProduct(GetProductRequest body) {
 		logger.info("Executing operation getProduct");
@@ -50,7 +49,11 @@ public class ShoppingCartPortTypeImpl implements ShoppingCartPortType {
     }
 
 	@Override
-	public GetAllProductsResponse getAllProducts(Object arg0) {
-		throw new UnsupportedOperationException();
+	public GetAllProductsResponse getAllProducts(GetAllProductsRequest body) {
+		GetAllProductsResponse response = new GetAllProductsResponse();
+		ProductsType products = new ProductsType();
+		products.getProduct().addAll(getProducts());
+		response.setProducts(products);
+		return response;
 	}
 }
