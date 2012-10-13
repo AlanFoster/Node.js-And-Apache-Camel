@@ -10,7 +10,14 @@
 	
     <!-- Type definitions for messages -->
     <wsdl:types>
-        <xs:schema targetNamespace="http://www.alanfoster.me/" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+        <xs:schema
+        	targetNamespace="http://www.alanfoster.me/"
+            xmlns:sc="http://www.alanfoster.me/"
+        	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        	attributeFormDefault="unqualified"
+        	elementFormDefault="qualified">
+        	
+          <!-- Product Operations -->
             <xs:element name="GetProductRequest">
                 <xs:complexType>
                     <xs:sequence>
@@ -18,14 +25,44 @@
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
-            <xs:element name="Product">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="ProductId" type="xs:string" />
-                        <xs:element name="Price" type="xs:float"/>
-                    </xs:sequence>
-                </xs:complexType>
+         
+            <xs:element name="GetProductResponse">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="Product" type="sc:ProductType" />
+                </xs:sequence>
+              </xs:complexType>
             </xs:element>
+
+          <xs:element name="GetAllProductsRequest" />
+
+          <xs:element name="GetAllProductsResponse">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="Products" type="sc:ProductsType" />
+                </xs:sequence>
+              </xs:complexType>
+          </xs:element>
+          
+          <!-- User Operations -->
+          <!--  TODO -->         
+          
+          <!-- Global Types -->
+          <xs:complexType name="ProductType">
+            <xs:sequence>
+              <xs:element name="ProductId" type="xs:string" />
+              <xs:element name="name" type="xs:string" />
+              <xs:element name="description" type="xs:string" />
+              <xs:element name="Price" type="xs:float"/>
+            </xs:sequence>
+          </xs:complexType>
+
+          <xs:complexType name="ProductsType">
+            <xs:sequence minOccurs="0" maxOccurs="unbounded">
+              <xs:element name="Product" type="sc:ProductType" />
+            </xs:sequence>
+          </xs:complexType>
+          
         </xs:schema>
     </wsdl:types>
     
@@ -33,15 +70,26 @@
     <wsdl:message name="GetProductRequest">
         <wsdl:part name="body" element="xsd1:GetProductRequest" />
     </wsdl:message>
-    <wsdl:message name="ProductDetails">
-        <wsdl:part name="body" element="xsd1:Product"/>
+    <wsdl:message name="GetProductResponse">
+        <wsdl:part name="body" element="xsd1:GetProductResponse"/>
     </wsdl:message>
     
+    <wsdl:message name="GetAllProductsRequest">
+        <wsdl:part name="body" element="xsd1:GetAllProductsRequest" />
+    </wsdl:message>
+    <wsdl:message name="GetAllProductsResponse">
+        <wsdl:part name="body" element="xsd1:GetAllProductsResponse"/>
+    </wsdl:message>
+
     <!-- Port Interface -->
     <wsdl:portType name="ShoppingCartPortType">
         <wsdl:operation name="GetProduct">
             <wsdl:input message="tns:GetProductRequest"/>
-            <wsdl:output message="tns:ProductDetails"/>
+            <wsdl:output message="tns:GetProductResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetAllProducts">
+            <wsdl:input message="tns:GetAllProductsRequest"/>
+            <wsdl:output message="tns:GetAllProductsResponse"/>
         </wsdl:operation>
     </wsdl:portType>
     
@@ -50,6 +98,15 @@
         <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
         <wsdl:operation name="GetProduct">
             <soap:operation soapAction="urn:GetProduct"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetAllProducts">
+            <soap:operation soapAction="urn:GetAllProducts"/>
             <wsdl:input>
                 <soap:body use="literal"/>
             </wsdl:input>
