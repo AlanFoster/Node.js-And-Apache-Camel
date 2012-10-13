@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<wsdl:definitions name="ShoppingCart" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.alanfoster.me/" xmlns:tns="http://www.alanfoster.me/" xmlns:xsd1="http://www.alanfoster.me/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"  >
+<wsdl:definitions
+	name="ShoppingCart"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.alanfoster.me/"
+	xmlns:tns="http://www.alanfoster.me/"
+	xmlns:xsd1="http://www.alanfoster.me/"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" >
+	
+    <!-- Type definitions for messages -->
     <wsdl:types>
         <xs:schema targetNamespace="http://www.alanfoster.me/" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
             <xs:element name="GetProductRequest">
@@ -19,18 +28,24 @@
             </xs:element>
         </xs:schema>
     </wsdl:types>
+    
+    <!-- In/Out Message definitions -->
     <wsdl:message name="GetProductRequest">
         <wsdl:part name="body" element="xsd1:GetProductRequest" />
     </wsdl:message>
     <wsdl:message name="ProductDetails">
         <wsdl:part name="body" element="xsd1:Product"/>
     </wsdl:message>
+    
+    <!-- Port Interface -->
     <wsdl:portType name="ShoppingCartPortType">
         <wsdl:operation name="GetProduct">
             <wsdl:input message="tns:GetProductRequest"/>
             <wsdl:output message="tns:ProductDetails"/>
         </wsdl:operation>
     </wsdl:portType>
+    
+    <!--  Port bindings for transporting -->
     <wsdl:binding name="ShoppingCartBinding" type="tns:ShoppingCartPortType">
         <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
         <wsdl:operation name="GetProduct">
@@ -43,6 +58,8 @@
             </wsdl:output>
         </wsdl:operation>
     </wsdl:binding>
+    
+    <!-- Service Definition -->
     <wsdl:service name="ShoppingCart">
         <wsdl:documentation>Shopping Cart Service</wsdl:documentation>
         <wsdl:port name="ShoppingCartPort" binding="tns:ShoppingCartBinding">

@@ -22,8 +22,6 @@ public class RouteTest extends CamelBlueprintTestSupport {
 
         // assert expectations
         assertMockEndpointsSatisfied();*/
-    	
-    	
     }
 
 }
