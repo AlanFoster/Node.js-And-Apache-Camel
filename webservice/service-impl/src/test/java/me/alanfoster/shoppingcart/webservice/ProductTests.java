@@ -18,8 +18,8 @@ import org.slf4j.LoggerFactory;
 
 import static org.junit.Assert.*;
 
-public class ShoppingCartTests {
-	Logger logger = LoggerFactory.getLogger(ShoppingCartTests.class);
+public class ProductTests {
+	Logger logger = LoggerFactory.getLogger(ProductTests.class);
 
 	@Before
 	public void setUp() {

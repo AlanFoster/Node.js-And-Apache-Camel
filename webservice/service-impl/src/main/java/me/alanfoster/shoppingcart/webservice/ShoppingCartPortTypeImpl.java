@@ -7,8 +7,11 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
+import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.CustomerType;
 import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.GetAllProductsRequest;
 import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.GetAllProductsResponse;
+import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.GetCustomerRequest;
+import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.GetCustomerResponse;
 import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.GetProductRequest;
 import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.GetProductResponse;
 import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.ProductType;
@@ -23,6 +26,7 @@ public class ShoppingCartPortTypeImpl implements ShoppingCartPortType {
      * ProductId mapping to Product
      */
     private Map<String, ProductType> products;
+    private List<CustomerType> customers;
     
     public ShoppingCartPortTypeImpl() {
     	products = new HashMap<String, ProductType>();
@@ -36,6 +40,14 @@ public class ShoppingCartPortTypeImpl implements ShoppingCartPortType {
     	for(ProductType product : products) {
     		this.products.put(product.getProductId(), product);
     	}
+    }
+    
+    protected List<CustomerType> getCustomers() {
+    	return new LinkedList<CustomerType>(customers);
+    }
+    
+    public void setCustomers(List<CustomerType> customers) {
+    	this.customers = customers;
     }
     
 	@Override
@@ -55,5 +67,27 @@ public class ShoppingCartPortTypeImpl implements ShoppingCartPortType {
 		products.getProduct().addAll(getProducts());
 		response.setProducts(products);
 		return response;
+	}
+
+	@Override
+	public GetCustomerResponse getCustomer(GetCustomerRequest body) {
+		String email = body.getEmail();
+		String password = body.getPassword();
+		
+		CustomerType customer = getCustomer(email, password);
+		
+		GetCustomerResponse response = new GetCustomerResponse();
+		response.setCustomer(customer);
+
+		return response;
+	}
+	
+	private CustomerType getCustomer(String email, String password) {
+		for(CustomerType customer : customers) {
+			if(customer.getPassword().equals(password) && customer.getEmail().equals(email)) {
+				return customer;
+			}
+		}
+		return null;
 	}
 }
