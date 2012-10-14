@@ -31,6 +31,8 @@ app.configure(function(){
   app.use(express.static(__dirname + "/public"));
 });
 
+var webserviceLocation;
+
 app.dynamicHelpers({
     user : function(req, res) {
         return req.session.user;
@@ -44,9 +46,16 @@ app.configure("development", function(){
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
 
+app.configure("testing", function(){
+    app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+});
+
+
 app.configure("production", function(){
   app.use(express.errorHandler());
 });
+
+
 
 // Middleware for requiring a login
 function requiresLogin(req, res, next){
