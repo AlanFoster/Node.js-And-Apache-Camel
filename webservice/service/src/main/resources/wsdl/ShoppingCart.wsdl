@@ -1,128 +1,184 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <wsdl:definitions
 	name="ShoppingCart"
-	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 	targetNamespace="http://www.alanfoster.me/"
 	xmlns:tns="http://www.alanfoster.me/"
 	xmlns:xsd1="http://www.alanfoster.me/"
 	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" >
-	
-    <!-- Type definitions for messages -->
-    <wsdl:types>
-        <xs:schema
-        	targetNamespace="http://www.alanfoster.me/"
-            xmlns:sc="http://www.alanfoster.me/"
-        	xmlns:xs="http://www.w3.org/2001/XMLSchema"
-        	attributeFormDefault="unqualified"
-        	elementFormDefault="qualified">
-        	
-          <!-- Product Operations -->
-            <xs:element name="GetProductRequest">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="ProductId" type="xs:string" />
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-         
-            <xs:element name="GetProductResponse">
-              <xs:complexType>
-                <xs:sequence>
-                  <xs:element name="Product" type="sc:ProductType" />
-                </xs:sequence>
-              </xs:complexType>
-            </xs:element>
 
-          <xs:element name="GetAllProductsRequest" >
-              <xs:complexType />
-          </xs:element>
+  <!-- Type definitions for messages -->
+  <wsdl:types>
+    <xs:schema
+      targetNamespace="http://www.alanfoster.me/"
+        xmlns:sc="http://www.alanfoster.me/"
+      xmlns:xs="http://www.w3.org/2001/XMLSchema"
+      attributeFormDefault="unqualified"
+      elementFormDefault="qualified">
 
-          <xs:element name="GetAllProductsResponse">
-              <xs:complexType>
-                <xs:sequence>
-                  <xs:element name="Products" type="sc:ProductsType" />
-                </xs:sequence>
-              </xs:complexType>
-          </xs:element>
-          
-          <!-- User Operations -->
-          <!--  TODO -->         
-          
-          <!-- Global Types -->
-          <xs:complexType name="ProductType">
-            <xs:sequence>
-              <xs:element name="ProductId" type="xs:string" />
-              <xs:element name="name" type="xs:string" />
-              <xs:element name="description" type="xs:string" />
-              <xs:element name="Price" type="xs:float"/>
-            </xs:sequence>
-          </xs:complexType>
+      <!-- Product Operations -->
+      <xs:element name="GetProductRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="ProductId" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
 
-          <xs:complexType name="ProductsType">
-            <xs:sequence minOccurs="0" maxOccurs="unbounded">
-              <xs:element name="Product" type="sc:ProductType" />
-            </xs:sequence>
-          </xs:complexType>
-          
-        </xs:schema>
-    </wsdl:types>
-    
-    <!-- In/Out Message definitions -->
-    <wsdl:message name="GetProductRequest">
-        <wsdl:part name="body" element="xsd1:GetProductRequest" />
-    </wsdl:message>
-    <wsdl:message name="GetProductResponse">
-        <wsdl:part name="body" element="xsd1:GetProductResponse"/>
-    </wsdl:message>
-    
-    <wsdl:message name="GetAllProductsRequest">
-        <wsdl:part name="body" element="xsd1:GetAllProductsRequest" />
-    </wsdl:message>
-    <wsdl:message name="GetAllProductsResponse">
-        <wsdl:part name="body" element="xsd1:GetAllProductsResponse"/>
-    </wsdl:message>
+      <xs:element name="GetProductResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Product" type="sc:ProductType" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
 
-    <!-- Port Interface -->
-    <wsdl:portType name="ShoppingCartPortType">
-        <wsdl:operation name="GetProduct">
-            <wsdl:input message="tns:GetProductRequest"/>
-            <wsdl:output message="tns:GetProductResponse"/>
-        </wsdl:operation>
-        <wsdl:operation name="GetAllProducts">
-            <wsdl:input message="tns:GetAllProductsRequest"/>
-            <wsdl:output message="tns:GetAllProductsResponse"/>
-        </wsdl:operation>
-    </wsdl:portType>
-    
-    <!--  Port bindings for transporting -->
-    <wsdl:binding name="ShoppingCartBinding" type="tns:ShoppingCartPortType">
-        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
-        <wsdl:operation name="GetProduct">
-            <soap:operation soapAction="urn:GetProduct"/>
-            <wsdl:input>
-                <soap:body use="literal"/>
-            </wsdl:input>
-            <wsdl:output>
-                <soap:body use="literal"/>
-            </wsdl:output>
-        </wsdl:operation>
-        <wsdl:operation name="GetAllProducts">
-            <soap:operation soapAction="urn:GetAllProducts"/>
-            <wsdl:input>
-                <soap:body use="literal"/>
-            </wsdl:input>
-            <wsdl:output>
-                <soap:body use="literal"/>
-            </wsdl:output>
-        </wsdl:operation>
-    </wsdl:binding>
-    
-    <!-- Service Definition -->
-    <wsdl:service name="ShoppingCart">
-        <wsdl:documentation>Shopping Cart Service</wsdl:documentation>
-        <wsdl:port name="ShoppingCartPort" binding="tns:ShoppingCartBinding">
-            <soap:address location="http://localhost:10000/ShoppingCart"/>
-        </wsdl:port>
-    </wsdl:service>
+      <xs:element name="GetAllProductsRequest" >
+        <xs:complexType />
+      </xs:element>
+
+      <xs:element name="GetAllProductsResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Products" type="sc:ProductsType" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+
+      <!-- User Operations -->
+      <xs:element name="GetCustomerRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="email" type="xs:string" />
+            <xs:element name="password" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+
+      <xs:element name="GetCustomerResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Customer" type="sc:CustomerType" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+
+      <!-- Global Types -->
+      <xs:complexType name="ProductType">
+        <xs:sequence>
+          <xs:element name="productId" type="xs:string" />
+          <xs:element name="name" type="xs:string" />
+          <xs:element name="description" type="xs:string" />
+          <xs:element name="Price" type="xs:float"/>
+        </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="ProductsType">
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="Product" type="sc:ProductType" />
+        </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="CustomerType">
+        <xs:sequence>
+          <xs:element name="email" type="xs:string" />
+          <xs:element name="password" type="xs:string" />
+          <xs:element name="ShoppingCart" type="sc:ShoppingCartType" />
+        </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="ShoppingCartType">
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="CartItem" type="sc:CartItemType" />
+        </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="CartItemType">
+        <xs:sequence>
+          <xs:element name="Product"  type="sc:ProductType" />
+          <xs:element name="quantity" type="xs:nonNegativeInteger" />
+        </xs:sequence>
+      </xs:complexType>
+
+    </xs:schema>
+  </wsdl:types>
+
+  <!-- In/Out Message definitions -->
+  <wsdl:message name="GetProductRequest">
+    <wsdl:part name="body" element="xsd1:GetProductRequest" />
+  </wsdl:message>
+  <wsdl:message name="GetProductResponse">
+    <wsdl:part name="body" element="xsd1:GetProductResponse"/>
+  </wsdl:message>
+
+  <wsdl:message name="GetAllProductsRequest">
+    <wsdl:part name="body" element="xsd1:GetAllProductsRequest" />
+  </wsdl:message>
+  <wsdl:message name="GetAllProductsResponse">
+    <wsdl:part name="body" element="xsd1:GetAllProductsResponse"/>
+  </wsdl:message>
+
+  <wsdl:message name="GetCustomerRequest">
+    <wsdl:part name="body" element="xsd1:GetCustomerRequest" />
+  </wsdl:message>
+  <wsdl:message name="GetCustomerResponse">
+    <wsdl:part name="body" element="xsd1:GetCustomerResponse"/>
+  </wsdl:message>
+
+  <!-- Port Interface -->
+  <wsdl:portType name="ShoppingCartPortType">
+    <wsdl:operation name="GetProduct">
+      <wsdl:input message="tns:GetProductRequest"/>
+      <wsdl:output message="tns:GetProductResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllProducts">
+      <wsdl:input message="tns:GetAllProductsRequest"/>
+      <wsdl:output message="tns:GetAllProductsResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomer">
+      <wsdl:input message="tns:GetCustomerRequest"/>
+      <wsdl:output message="tns:GetCustomerResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+
+  <!--  Port bindings for transporting -->
+  <wsdl:binding name="ShoppingCartBinding" type="tns:ShoppingCartPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="GetProduct">
+      <soap:operation soapAction="urn:GetProduct"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllProducts">
+      <soap:operation soapAction="urn:GetAllProducts"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomer">
+      <soap:operation soapAction="urn:GetCustomer"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+
+  <!-- Service Definition -->
+  <wsdl:service name="ShoppingCart">
+    <wsdl:documentation>Shopping Cart Service</wsdl:documentation>
+    <wsdl:port name="ShoppingCartPort" binding="tns:ShoppingCartBinding">
+      <soap:address location="http://localhost:10000/ShoppingCart"/>
+    </wsdl:port>
+  </wsdl:service>
 </wsdl:definitions>
