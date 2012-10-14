@@ -78,6 +78,7 @@ public class ShoppingCartPortTypeImpl implements ShoppingCartPortType {
 		
 		GetCustomerResponse response = new GetCustomerResponse();
 		response.setCustomer(customer);
+		response.setSuccess(customer != null);
 
 		return response;
 	}

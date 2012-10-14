@@ -59,6 +59,7 @@
       <xs:element name="GetCustomerResponse">
         <xs:complexType>
           <xs:sequence>
+            <xs:element name="success" type="xs:boolean" default="false" />
             <xs:element name="Customer" type="sc:CustomerType" />
           </xs:sequence>
         </xs:complexType>
@@ -100,6 +101,7 @@
           <xs:element name="quantity" type="xs:nonNegativeInteger" />
         </xs:sequence>
       </xs:complexType>
+      
 
     </xs:schema>
   </wsdl:types>
