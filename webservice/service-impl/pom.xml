@@ -12,6 +12,9 @@
   <groupId>me.alanfoster.tests.shoppingcart</groupId>
   <artifactId>service-impl</artifactId>
   <packaging>bundle</packaging>
+  
+  <name>Shopping Cart WebService Implementation</name>
+  <url>http://www.alanfoster.me</url>
 
   <dependencies>
   

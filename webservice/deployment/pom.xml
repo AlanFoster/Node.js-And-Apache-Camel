@@ -14,7 +14,7 @@
   <artifactId>deployment</artifactId>
   <packaging>pom</packaging>
 
-  <name>Shopping Cart</name>
+  <name>Shopping Cart Deployment</name>
   <url>http://www.alanfoster.me</url>
 
   <properties>

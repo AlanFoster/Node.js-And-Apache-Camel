@@ -32,6 +32,12 @@ public class ShoppingCartPortTypeImpl implements ShoppingCartPortType {
     	products = new HashMap<String, ProductType>();
     }
     
+    public void init() {
+    	logger.info("Initialised");
+    	setProducts(new LinkedList<ProductType>());
+    	setCustomers(new LinkedList<CustomerType>());
+    }
+    
     protected List<ProductType> getProducts() {
     	return new LinkedList<ProductType>(products.values());
     }

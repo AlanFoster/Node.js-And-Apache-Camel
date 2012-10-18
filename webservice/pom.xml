@@ -21,6 +21,7 @@
   </properties>
 
   <modules>
+    <module>deployment</module>
     <module>service</module>
     <module>service-impl</module>
   </modules>

@@ -12,10 +12,10 @@
 
 
   <groupId>me.alanfoster.tests.shoppingcart.deployment</groupId>
-  <artifactId>features</artifactId>
+  <artifactId>karaf-features</artifactId>
   <packaging>pom</packaging>
 
-  <name>Shopping Cart</name>
+  <name>Shopping Cart Deployment Karaf Features</name>
   <url>http://www.alanfoster.me</url>
 
   <properties>
@@ -28,6 +28,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>1.6</version>
 				<executions>
 					<execution>
 						<id>attach-artifacts</id>
@@ -40,6 +41,7 @@
 								<artifact>
 									<file>target/classes/features.xml</file>
 									<type>xml</type>
+									<classifier>features</classifier>
 								</artifact>
 							</artifacts>
 						</configuration>

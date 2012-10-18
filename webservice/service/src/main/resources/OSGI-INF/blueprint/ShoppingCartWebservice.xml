@@ -20,11 +20,13 @@
 		</cxf:properties>
 	</cxf:cxfEndpoint>
 
+	<reference id="shoppingCartServiceImp" availability="mandatory" interface="me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.ShoppingCartPortType" />
+
 	<camelContext xmlns="http://camel.apache.org/schema/blueprint">
 		<route>
 			<from uri="cxf:bean:shoppingcart-webservice" />
 			<log message="Received call" />
-			<to uri="mock:result" />
+			<to uri="bean:shoppingCartServiceImp" />
 		</route>
 	</camelContext>
 
