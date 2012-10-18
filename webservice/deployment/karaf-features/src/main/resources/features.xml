@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Shopping Cart Features File -->
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.0.0">
+   <features name="shoppingCart" version="${project.version}">
+      <feature>cxf</feature>
+      <feature>service</feature>
+      <feature>service-impl</feature>
+   </features>
+
+   <features name="service" version="${project.version}">
+      <feature>mvn:me.alanfoster.tests.shoppingcart/service/${project.version}</feature>
+   </features>
+
+   <features name="service-impl" version="${project.version}">
+      <feature>mvn:me.alanfoster.tests.shoppingcart/service/${project.version}</feature>
+   </features>
+
+</features>
