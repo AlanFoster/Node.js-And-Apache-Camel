@@ -13,7 +13,7 @@
 	<cxf:cxfEndpoint
 		id="shoppingcart-webservice"
 		address="http://localhost:10000/ShoppingCart"
-		serviceClass="me.alanfoster.ShoppingCartPortType">
+		serviceClass="me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.ShoppingCartPortType">
 		<cxf:properties>
 			<entry key="defaultOperationNamespace" value="http://www.alanfoster.me" />
 			<entry key="dataFormat" value="PAYLOAD" />

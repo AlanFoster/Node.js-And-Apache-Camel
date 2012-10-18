@@ -13,7 +13,7 @@
   <artifactId>service</artifactId>
   <packaging>bundle</packaging>
 
-  <name>A Camel Blueprint Route</name>
+  <name>Shopping Cart WebService</name>
   <url>http://www.myorganization.org</url>
 
   <properties>
@@ -35,11 +35,16 @@
         <configuration>
           <instructions>
             <Bundle-SymbolicName>${project.groupId}.${project.artifactId}.${project.version}</Bundle-SymbolicName>
-       <!--      <Private-Package>me.alanfoster.shoppingcart.webservice.*</Private-Package>         -->                            
+       <!--      <Private-Package>me.alanfoster.shoppingcart.webservice.*</Private-Package>         -->        
+          <!--    me.alanfoster.tests.shoppingCart.wsdl.proxyClasses, -->                    
             <Import-Package>
                 *,
+          
                 org.apache.camel.osgi
                </Import-Package>
+               <Dynamic-Import>
+               	*
+               </Dynamic-Import>
           </instructions>
         </configuration>
       </plugin>
