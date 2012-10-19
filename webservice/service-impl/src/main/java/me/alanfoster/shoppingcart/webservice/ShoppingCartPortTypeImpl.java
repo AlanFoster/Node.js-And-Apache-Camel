@@ -76,16 +76,16 @@ public class ShoppingCartPortTypeImpl implements ShoppingCartPortType {
 	}
 
 	@Override
-	public GetCustomerResponse getCustomer(GetCustomerRequest body) {
+	public GetCustomerResponse getCustomer(GetCustomerRequest body) {		
 		String email = body.getEmail();
 		String password = body.getPassword();
 		
-		CustomerType customer = getCustomer(email, password);
+		CustomerType customer = foo(); //getCustomer(email, password);
 		
 		GetCustomerResponse response = new GetCustomerResponse();
 		response.setCustomer(customer);
 		response.setSuccess(customer != null);
-
+		
 		return response;
 	}
 	
@@ -96,5 +96,12 @@ public class ShoppingCartPortTypeImpl implements ShoppingCartPortType {
 			}
 		}
 		return null;
+	}
+	
+	private CustomerType foo() {
+    	CustomerType expectedCustomer = new CustomerType();
+    	expectedCustomer.setEmail("a");
+    	expectedCustomer.setPassword("b");
+    	return expectedCustomer;
 	}
 }

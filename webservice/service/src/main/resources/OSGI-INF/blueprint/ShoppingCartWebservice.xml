@@ -15,18 +15,26 @@
 		address="http://localhost:10000/ShoppingCart"
 		serviceClass="me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.ShoppingCartPortType">
 		<cxf:properties>
-			<entry key="defaultOperationNamespace" value="http://www.alanfoster.me" />
-			<entry key="dataFormat" value="PAYLOAD" />
+<!-- 			 <entry key="defaultOperationNamespace" value="http://www.alanfoster.me/" /> -->
+			<entry key="dataFormat" value="PAYLOAD" /> 
 		</cxf:properties>
 	</cxf:cxfEndpoint>
 
-	<reference id="shoppingCartServiceImp" availability="mandatory" interface="me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.ShoppingCartPortType" />
+	<bean id="operationNameHelper" class="me.alanfoster.tests.shoppingcart.util.OperationNameHelper" />
+
+	<reference id="shoppingCartServiceImpl" availability="mandatory" interface="me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.ShoppingCartPortType" />
 
 	<camelContext xmlns="http://camel.apache.org/schema/blueprint">
-		<route>
+		<route id="ShoppingCartWebservice">
 			<from uri="cxf:bean:shoppingcart-webservice" />
-			<log message="Received call" />
-			<to uri="bean:shoppingCartServiceImp" />
+			<log message="Received Message" />
+			<recipientList>
+				<simple>bean:shoppingCartServiceImpl?method=${bean:operationNameHelper?method=getOperationName}</simple>
+			</recipientList>
+			<setBody>
+				<simple>${bodyAs(String)}</simple>
+			</setBody>
+			<log message="Responding" />
 		</route>
 	</camelContext>
 

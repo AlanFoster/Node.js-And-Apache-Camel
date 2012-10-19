@@ -63,10 +63,10 @@
                     <wsdlOptions>
                         <wsdlOption>
                             <wsdl>${wsdl.wsdl}</wsdl>
-                            <wsdlLocation>${wsdl.wsdlLocation}</wsdlLocation>
+                   <!--          <wsdlLocation>${wsdl.wsdlLocation}</wsdlLocation> -->
                              <extraargs>
                                 <extraarg>-verbose</extraarg>
-                                <extraarg>-validate</extraarg>
+                                <!-- <extraarg>-validate</extraarg> -->
                                 <extraarg>-p</extraarg>
                                 <extraarg>me.alanfoster.tests.shoppingcart.wsdl.proxyclasses</extraarg>
                             </extraargs>

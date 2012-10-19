@@ -1,4 +1,7 @@
-
-/app/.idea
-/app/node_modules
+.classpath
+.project
+.settings/
+target/
+.idea
+node_modules
 *.log
