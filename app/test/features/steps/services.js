@@ -1,6 +1,6 @@
 var steps = function() {
     this.World = require("../support/world.js").World;
-    var assert = require("../helpers/assert");
+    var assert = require("./../../helpers/assert");
     var _ = require("underscore");
 
     var fs = require("fs");
@@ -13,23 +13,32 @@ var steps = function() {
     var port;
 
     var TestService = {
-        TestService : {
-            TestServicePort : {
-                GetProduct : function(args) {
-                    return { ProductId : "123", Price: 1.00 };
+        "ShoppingCart":{
+            "ShoppingCartPort":{
+                "GetProduct":function () {
+                            return {
+                                "productId":"1",
+                                "name":"Cheese",
+                                "description":"Cheese Description",
+                                "Price":1.0
+                            }
+                        }
                 }
             }
-        }
-    };
+        };
 
     this.Given("there is a mocked soap service running on port '$portNumber'", function(portNumber, callback) {
         port = portNumber;
+
         var server = http.createServer(function(req, res) {
             res.statusCode = 404;
             res.end();
         });
 
         server.listen(port);
+        server.log = function(type, data) {
+            console.log("sdifaisfjasf" + data);
+        };
 
         // Assert the server is running
         request("http://localhost:" + port, function(err, res, body) {
@@ -44,12 +53,12 @@ var steps = function() {
     this.Given("there is a basic mock service running", function(callback) {
         var server = this.server;
         var wsdl = fs.readFileSync(wsdlLocation, 'utf8');
-        soap.listen(server, '/TestService', TestService, wsdl);
+        soap.listen(server, '/ShoppingCart', TestService, wsdl);
         callback();
     });
 
     this.Given("there is a valid generated wsdl", function(callback) {
-        request("http://localhost:" + port + "/TestService?wsdl", function(err, res, body) {
+        request("http://localhost:" + port + "/ShoppingCart?wsdl", function(err, res, body) {
             assert.assertTrue(!err, "Expected no error in calling generated wsdl");
             assert.assertEquals(res.statusCode, 200, "expect 200 status response");
             assert.assertTrue(body.length > 0, "expected a wsdl body");
@@ -58,25 +67,32 @@ var steps = function() {
         })
     });
 
-    this.When("I call the 'GetProduct' soap service with the product id '123'", function(callback) {
+    this.When("I call the 'GetProduct' soap service with the product id '1'", function(callback) {
         var self = this;
-        soap.createClient("http://localhost:" + port + "/TestService?wsdl", function(err, client) {
+        soap.createClient("http://localhost:" + port + "/ShoppingCart?wsdl", function(err, client) {
             assert.assertTrue(!err, "expected to create a client succesfully");
-            client.GetProduct({ ProductId : "123" }, function(err, result) {
+            client.GetProduct({ "xsd1:ProductId" : "1" }, function(err, result) {
                 assert.assertTrue(!err, "Expected no error from GetProduct call");
+
+                console.log(JSON.stringify(client.lastRequest, null, 4));
+
                 self.productDetailsResponse = result;
+
+                console.log(result);
                 callback();
             });
         });
     });
 
     this.Then("I get valid product details back", function(callback) {
-        var result = this.productDetailsResponse;
-        assert.assertEquals("123", result.ProductId);
-        assert.assertEquals(1.00, parseFloat(result.Price));
+        var result = this.productDetailsResponse.Product;
+        console.log("before)")
+        console.log(this.productDetailsResponse);
+        console.log("after");
+        assert.assertEquals("1", result.productId);
+        assert.assertEquals(1.00, parseFloat(result.price));
         callback();
     });
-
 
     this.When("I test cucumber.js with the following json", function(multiline, callback) {
         this.jsonObject = JSON.parse(multiline);

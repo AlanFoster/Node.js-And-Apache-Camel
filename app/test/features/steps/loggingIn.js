@@ -1,6 +1,6 @@
 var steps = function() {
     this.World = require("../support/world.js").World;
-    var assert = require("../helpers/assert");
+    var assert = require("./../../helpers/assert");
     var _ = require("underscore");
 
 
@@ -33,7 +33,6 @@ var steps = function() {
         var email = details.hashes()[0]["email"];
         var password = details.hashes()[0]["password"];
 
-        // TODO See why 'email' doesn't work by itself and why I need to specify the id
         this.browser
             .fill("#email", email)
             .fill("#password", password)

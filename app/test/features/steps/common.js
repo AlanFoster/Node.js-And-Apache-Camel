@@ -1,6 +1,6 @@
 var steps = function() {
     this.World = require("../support/world.js").World;
-    var assert = require("../helpers/assert");
+    var assert = require("./../../helpers/assert");
     var _ = require("underscore");
 
     this.Given("the application is running", function(callback) {
@@ -39,8 +39,7 @@ var steps = function() {
     });
 
     this.Then("the page says '$expectedMessage'", function(expectedMessage, callback) {
-
-      assert.assertTrue(this.browser.text().indexOf(expectedMessage) > -1);
+       assert.assertTrue(this.browser.text().indexOf(expectedMessage) > -1);
 
        callback();
     });
