@@ -21,10 +21,9 @@ var Assert = (function () {
                     });
                 })(logMessage, arguments);
                 if (!assertPassed) {
-                    console.log("FAILED :: " + assertName + " : " + formattedLogMessage);
-                    throw new Error("FAILED :: " + assertName + " : " + formattedLogMessage);
-                } else {
-                    //console.log("PASSED :: " + assertName + " : " + formattedLogMessage);
+                    var message = "FAILED :: " + assertName + " : " + formattedLogMessage;
+                    console.log(message);
+                    throw new Error(message);
                 }
             };
         }).call(assertObject, assertDescription.name, assertDescription.func, assertDescription.logMessage);
