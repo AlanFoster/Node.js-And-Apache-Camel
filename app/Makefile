@@ -13,4 +13,8 @@ testBehaviour :
  	    DEBUG_LEVEL=5 ./node_modules/.bin/cucumber.js test/features/ -t ~@ignore -f pretty; \
         kill $$!
 
-.PHONY: install test testBehaviour testConnectivity
+testAll :
+	make testBehaviour;
+	make testConnectivity
+
+.PHONY: install test testBehaviour testConnectivity testAll
