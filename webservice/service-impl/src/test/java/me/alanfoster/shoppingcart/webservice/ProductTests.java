@@ -71,4 +71,5 @@ public class ProductTests {
     	
     	assertEqual(productsExpected, productsActual);
     }
+
 }
