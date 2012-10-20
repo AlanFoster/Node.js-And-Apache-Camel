@@ -3,14 +3,30 @@ var steps = function() {
     var assert = require("../helpers/assert");
     var _ = require("underscore");
 
-    this.Given("I am not logged in", function(callback) {
-        var browser = this.browser;
 
-        browser.visit("http://localhost:3000/")
-            .then(function() {
-                assert.assertEquals("Login", browser.text("#login a"));
-                callback();
-            });
+    var isLoggedIn = function(browser, callback) {
+        callback("Login" != browser.text("#login a"))
+    }
+
+    this.Given("I am not logged in", function(callback) {
+        isLoggedIn(this.browser, function(loggedIn) {
+            assert.assertFalse(loggedIn, "I should not be logged in");
+            callback();
+        })
+    });
+
+    this.Given("I am logged in", function(callback) {
+        isLoggedIn(this.browser, function(loggedIn) {
+            assert.assertTrue(loggedIn, "I should be logged in");
+            callback();
+        })
+    });
+
+    this.Then("I will not be logged in", function(callback) {
+        isLoggedIn(this.browser, function(loggedIn) {
+            assert.assertFalse(loggedIn, "I should not be logged in");
+            callback();
+        })
     });
 
     this.When("I log in with the following details", function(details, callback) {

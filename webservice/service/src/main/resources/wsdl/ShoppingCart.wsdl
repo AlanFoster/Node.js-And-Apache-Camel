@@ -25,7 +25,6 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-
       <xs:element name="GetProductResponse">
         <xs:complexType>
           <xs:sequence>
@@ -33,11 +32,9 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-
       <xs:element name="GetAllProductsRequest" >
         <xs:complexType />
       </xs:element>
-
       <xs:element name="GetAllProductsResponse">
         <xs:complexType>
           <xs:sequence>
@@ -45,7 +42,6 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-
       <!-- User Operations -->
       <xs:element name="GetCustomerRequest">
         <xs:complexType>
@@ -55,7 +51,6 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-
       <xs:element name="GetCustomerResponse">
         <xs:complexType>
           <xs:sequence>
@@ -64,7 +59,6 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-
       <!-- Global Types -->
       <xs:complexType name="ProductType">
         <xs:sequence>
@@ -74,13 +68,11 @@
           <xs:element name="Price" type="xs:float"/>
         </xs:sequence>
       </xs:complexType>
-
       <xs:complexType name="ProductsType">
         <xs:sequence minOccurs="0" maxOccurs="unbounded">
           <xs:element name="Product" type="sc:ProductType" />
         </xs:sequence>
       </xs:complexType>
-
       <xs:complexType name="CustomerType">
         <xs:sequence>
           <xs:element name="email" type="xs:string" />
@@ -88,21 +80,17 @@
           <xs:element name="ShoppingCart" type="sc:ShoppingCartType" />
         </xs:sequence>
       </xs:complexType>
-
       <xs:complexType name="ShoppingCartType">
         <xs:sequence minOccurs="0" maxOccurs="unbounded">
           <xs:element name="CartItem" type="sc:CartItemType" />
         </xs:sequence>
       </xs:complexType>
-
       <xs:complexType name="CartItemType">
         <xs:sequence>
           <xs:element name="Product"  type="sc:ProductType" />
           <xs:element name="quantity" type="xs:nonNegativeInteger" />
         </xs:sequence>
       </xs:complexType>
-      
-
     </xs:schema>
   </wsdl:types>
 

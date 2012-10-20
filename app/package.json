@@ -14,9 +14,7 @@
     },
     "devDependencies":{
         "request" : "latest",
-        "nodeunit" : "*",
         "mocha":"*",
-        "nock":"*",
         "cucumber":"latest",
         "zombie":"latest",
         "html5":"latest"
