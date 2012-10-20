@@ -1,3 +1,4 @@
+@ignore
 Feature: View website
   As an unregistered user
   I want to see what products are available
@@ -5,6 +6,8 @@ Feature: View website
 
   Background:
     Given the application is running
+    # And there is a mocked service running
+    # And there is a customer with the following details
 
   Scenario: View Homepage
     Given I am on the home page
@@ -39,7 +42,7 @@ Feature: View website
     When I click the 'Login' link
     Then I will be taken to the 'Login' page
     When I log in with the following details
-      | email     | password      |
-      | wrongUser | wrongPassword |
+      | email | password      |
+      | wrongUser   | wrongPassword |
     Then I will not be logged in
     And the page says 'Error! The supplied credentials were invalid!'
