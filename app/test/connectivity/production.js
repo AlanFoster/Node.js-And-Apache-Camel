@@ -27,7 +27,7 @@ describe('Production Webservice Connectivity', function(){
 
         it("should return a product when called GetProduct is called with an id of 1", function(callback) {
             var client = this.client;
-            client.GetProduct({ "tns:ProductId" : "1" }, function(err, result) {
+            client.GetProduct({ "tns:productId" : "1" }, function(err, result) {
                 assert.assertTrue(!err, "there should not be a client error");
                 //assert.ok(result);
                 //assert.ok(result.Products);

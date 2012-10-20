@@ -20,7 +20,7 @@ var steps = function() {
                                 "productId":"1",
                                 "name":"Cheese",
                                 "description":"Cheese Description",
-                                "Price":1.0
+                                "price":1.0
                             }
                         }
                 }
@@ -36,9 +36,6 @@ var steps = function() {
         });
 
         server.listen(port);
-        server.log = function(type, data) {
-            console.log("sdifaisfjasf" + data);
-        };
 
         // Assert the server is running
         request("http://localhost:" + port, function(err, res, body) {
@@ -73,22 +70,15 @@ var steps = function() {
             assert.assertTrue(!err, "expected to create a client succesfully");
             client.GetProduct({ "xsd1:ProductId" : "1" }, function(err, result) {
                 assert.assertTrue(!err, "Expected no error from GetProduct call");
-
-                console.log(JSON.stringify(client.lastRequest, null, 4));
-
                 self.productDetailsResponse = result;
 
-                console.log(result);
                 callback();
             });
         });
     });
 
     this.Then("I get valid product details back", function(callback) {
-        var result = this.productDetailsResponse.Product;
-        console.log("before)")
-        console.log(this.productDetailsResponse);
-        console.log("after");
+        var result = this.productDetailsResponse;
         assert.assertEquals("1", result.productId);
         assert.assertEquals(1.00, parseFloat(result.price));
         callback();

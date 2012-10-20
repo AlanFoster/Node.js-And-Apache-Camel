@@ -21,7 +21,7 @@
             <xs:element name="GetProductRequest">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element name="ProductId" type="xs:string" />
+                        <xs:element name="productId" type="xs:string" />
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -65,7 +65,7 @@
                     <xs:element name="productId" type="xs:string" />
                     <xs:element name="name" type="xs:string" />
                     <xs:element name="description" type="xs:string" />
-                    <xs:element name="Price" type="xs:float"/>
+                    <xs:element name="price" type="xs:float"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="ProductsType">
@@ -168,7 +168,7 @@
     <wsdl:service name="ShoppingCart">
         <wsdl:documentation>Shopping Cart Service</wsdl:documentation>
         <wsdl:port name="ShoppingCartPort" binding="tns:ShoppingCartBinding">
-            <soap:address location="http://localhost:10000/ShoppingCart"/>
+            <soap:address location="http://localhost:10001/ShoppingCart"/>
         </wsdl:port>
     </wsdl:service>
 </wsdl:definitions>
