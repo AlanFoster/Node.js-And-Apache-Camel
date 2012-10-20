@@ -1,5 +1,6 @@
 package me.alanfoster.shoppingcart.webservice;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
+import me.alanfoster.shoppingcart.webservice.util.ProductFactory;
 import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.CustomerType;
 import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.GetAllProductsRequest;
 import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.GetAllProductsResponse;
@@ -34,8 +36,23 @@ public class ShoppingCartPortTypeImpl implements ShoppingCartPortType {
     
     public void init() {
     	logger.info("Initialised");
-    	setProducts(new LinkedList<ProductType>());
-    	setCustomers(new LinkedList<CustomerType>());
+    	
+    	setProducts(getDefaultProducts());
+    	setCustomers(getDefaultCustomers());
+    }
+    
+    private List<ProductType> getDefaultProducts() {
+	    List<ProductType> defaultProducts = Arrays.asList(
+			ProductFactory.getNewProduct("1", "Duracell AA Battery", "Lasts longer", 4f),
+			ProductFactory.getNewProduct("2", "Milk", "Only the freshest", 0.89f),
+			ProductFactory.getNewProduct("3", "Eggs", "Free Range", 1.19f),
+			ProductFactory.getNewProduct("4", "Bread", "3 day life", 1.20f)
+		);
+	    return defaultProducts;
+    }
+    
+    private List<CustomerType> getDefaultCustomers() {
+    	return new LinkedList<CustomerType>();
     }
     
     protected List<ProductType> getProducts() {

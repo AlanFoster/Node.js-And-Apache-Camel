@@ -26,7 +26,7 @@
 	<camelContext xmlns="http://camel.apache.org/schema/blueprint">
 		<route id="ShoppingCartWebservice">
 			<from uri="cxf:bean:shoppingcart-webservice" />
-			<log message="Received Message" />
+			<log message="Received Message for operation ${headers.operationName}" />
 			<recipientList>
 				<simple>bean:shoppingCartServiceImpl?method=${bean:operationNameHelper?method=getOperationName}</simple>
 			</recipientList>
