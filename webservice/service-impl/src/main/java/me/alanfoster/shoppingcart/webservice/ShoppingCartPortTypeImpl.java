@@ -80,7 +80,7 @@ public class ShoppingCartPortTypeImpl implements ShoppingCartPortType {
 		String email = body.getEmail();
 		String password = body.getPassword();
 		
-		CustomerType customer = foo(); //getCustomer(email, password);
+		CustomerType customer = getCustomer(email, password);
 		
 		GetCustomerResponse response = new GetCustomerResponse();
 		response.setCustomer(customer);
@@ -96,12 +96,5 @@ public class ShoppingCartPortTypeImpl implements ShoppingCartPortType {
 			}
 		}
 		return null;
-	}
-	
-	private CustomerType foo() {
-    	CustomerType expectedCustomer = new CustomerType();
-    	expectedCustomer.setEmail("a");
-    	expectedCustomer.setPassword("b");
-    	return expectedCustomer;
 	}
 }

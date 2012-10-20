@@ -20,4 +20,4 @@ Feature: View website
       | email | password |
       | foo   | bar      |
     Then I will be taken to the 'Shopping Cart' page
-    And the page says 'Welcome foo to your shopping card Empty Shopping Cart'
+    And the page says 'Welcome foo to your shopping cart Empty Shopping Cart'

@@ -6,17 +6,15 @@
 var express = require("express"),
     routes = require("./controllers"),
     _ = require("underscore");
+    configManager = require("konphyg")(__dirname + "/config"),
+    webserviceConfig = configManager("webservice"),
+    websiteConfig = configManager("website");
 
-var config = {
-    websiteName: "Alan's Website",
-    motto: "Alan's Website's Motto",
-    email: "alan@website.com"
-}
 
 var app = module.exports = express.createServer();
 
-// Configuration
-_.each(config, function(value, key) { app.locals[key] = value; });
+// Add all of the website config to locals
+_.each(websiteConfig, function(value, key) { app.locals[key] = value; });
 
 app.configure(function(){
   app.set("views", __dirname + "/views");
@@ -54,8 +52,6 @@ app.configure("testing", function(){
 app.configure("production", function(){
   app.use(express.errorHandler());
 });
-
-
 
 // Middleware for requiring a login
 function requiresLogin(req, res, next){

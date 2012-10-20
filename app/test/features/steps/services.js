@@ -8,11 +8,9 @@ var steps = function() {
     var request = require("request");
     var soap = require("soap");
 
-
     var wsdlLocation = "/home/a/Downloads/Node.js-Test/app/services/wsdl/TestWsdl.wsdl";
 
-    var port = 10000;
-
+    var port;
 
     var TestService = {
         TestService : {
