@@ -4,7 +4,9 @@ var products = require("../models/products"),
 var  viewAllProducts = exports.viewAllProducts = {
     menuName : "Products",
     handle : function(req, res){
-        res.render("viewAllProducts", { title: "Products", products : products.products })
+        products.getAllProducts(function(err, products) {
+            res.render("viewAllProducts", { title: "Products", products : products })
+        });
     }
 };
 
