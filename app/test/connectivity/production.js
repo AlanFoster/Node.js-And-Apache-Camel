@@ -1,13 +1,16 @@
-var assert = require("assert")
+var assert = require("./../helpers/assert");
+var configManager = require("konphyg")(__dirname + "./../../config"),
+    webserviceConfig = configManager("webservice"),
+    soap = require("soap"),
+    serviceLocation = "http://" + webserviceConfig.host + ":" + webserviceConfig.port + "/" + webserviceConfig.serviceName + "?wsdl";
+
 describe('Production Webservice Connectivity', function(){
 
     describe('#Connecting With soap node', function(){
-        var soap = require("soap");
-        var assert = require("./../helpers/assert");
 
         it("should start client successfully", function(callback){
             var self = this;
-            soap.createClient("http://localhost:10000/ShoppingCart?wsdl", function(err, client) {
+            soap.createClient(serviceLocation, function(err, client) {
                 assert.assertTrue(!err, "there should not be a client error");
                 self.client = client;
                 callback();
