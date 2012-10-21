@@ -1,7 +1,7 @@
 package me.alanfoster.shoppingcart.webservice;
 
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +31,7 @@ public class ShoppingCartPortTypeImpl implements ShoppingCartPortType {
     private List<CustomerType> customers;
     
     public ShoppingCartPortTypeImpl() {
-    	products = new HashMap<String, ProductType>();
+
     }
     
     public void init() {
@@ -60,6 +60,7 @@ public class ShoppingCartPortTypeImpl implements ShoppingCartPortType {
     }
     
     public void setProducts(List<ProductType> products) {
+    	this.products = new LinkedHashMap<String, ProductType>();
     	for(ProductType product : products) {
     		this.products.put(product.getProductId(), product);
     	}
