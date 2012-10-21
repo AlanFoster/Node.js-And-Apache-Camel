@@ -1,17 +1,11 @@
 package me.alanfoster.shoppingcart.webservice;
 
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.CustomerType;
-import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.GetAllProductsRequest;
-import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.GetAllProductsResponse;
 import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.GetCustomerRequest;
 import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.GetCustomerResponse;
-import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.GetProductRequest;
-import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.GetProductResponse;
-import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.ProductType;
 
 import org.junit.After;
 import org.junit.Before;
@@ -21,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import static org.junit.Assert.*;
+import static me.alanfoster.shoppingcart.webservice.util.CustomerAssert.*;
 
 public class CustomerTests {
 	Logger logger = LoggerFactory.getLogger(CustomerTests.class);
@@ -60,7 +55,7 @@ public class CustomerTests {
     	assertTrue("Customer should have been found", response.isSuccess());
     	CustomerType actualCustomer = response.getCustomer();
     	
-    	assertEqualCustomer(expectedCustomer, actualCustomer);
+    	assertEqual(expectedCustomer, actualCustomer);
     }
     
     @Test
@@ -117,12 +112,8 @@ public class CustomerTests {
     	assertFalse("Customer should not have been found", response.isSuccess());
     	CustomerType actualCustomer = response.getCustomer();
     	
-    	assertEqualCustomer(expectedCustomer, actualCustomer);
+    	assertEqual(expectedCustomer, actualCustomer);
     }
 
 
-    private static void assertEqualCustomer(CustomerType expectedCustomer, CustomerType actualCustomer) {
-    	assertEquals("Both customers must have the same email", expectedCustomer.getEmail(), actualCustomer.getEmail());
-    	assertEquals("Both customers must have the same password", expectedCustomer.getPassword(), actualCustomer.getPassword());
-    }
 }
