@@ -5,8 +5,13 @@ Feature: View Products
 
   Background:
     Given the application is running
-# And there is a mocked service running
-# And the mocked products service has the following information
+    And there is a mocked soap service running on port '10001'
+    And the mocked products service has the following information
+    """
+    {
+      "Product" : "test"
+    }
+    """
 
   Scenario: Logging in
     Given I am on the home page

@@ -94,6 +94,26 @@ var steps = function() {
         assert.assertEquals(jsonObject["foo"], "bar", "the key foo should equal bar");
         callback();
     });
+
+
+    this.Given("the mocked products service has the following information", function(multiline, callback) {
+        var server = this.server;
+        var wsdl = fs.readFileSync(wsdlLocation, 'utf8');
+        var json = JSON.parse(multiline);
+
+        var TestService = {
+            "ShoppingCart":{
+                "ShoppingCartPort":{
+                    "GetAllProducts":function () {
+                        return json;
+                    }
+                }
+            }
+        };
+
+        soap.listen(server, '/ShoppingCart', TestService, wsdl);
+        callback();
+    });
 };
 
 module.exports = steps;
