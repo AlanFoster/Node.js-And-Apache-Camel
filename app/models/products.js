@@ -16,10 +16,8 @@ var products = [
 exports.getAllProducts = function(callback) {
     soap.createClient(serviceLocation, function(err, client) {
         assert.assertTrue(!err, "there should not be a client error");
-
         client.GetAllProducts({}, function(err, result) {
             assert.assertTrue(!err, "Expected no error from GetProduct call");
-            console.log(result);
             callback(undefined, result.Products.Product);
         });
     });

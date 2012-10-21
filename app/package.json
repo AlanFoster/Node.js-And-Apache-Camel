@@ -8,13 +8,13 @@
     "dependencies":{
         "express":"2.5.11",
         "ejs":">= 0.0.1",
-        "underscore":"*",
+        "underscore":"latest",
         "soap":"*",
         "konphyg":"1.0.x"
     },
     "devDependencies":{
         "request":"latest",
-        "mocha":"*",
+        "mocha":"latest",
         "cucumber":"latest",
         "zombie":"latest",
         "html5":"latest"
