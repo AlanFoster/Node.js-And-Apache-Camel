@@ -8,11 +8,11 @@
    </feature>
 
    <feature name="service">
-      <feature>mvn:me.alanfoster.tests.shoppingcart/service/1.0.0-SNAPSHOT</feature>
+      <bundle>mvn:me.alanfoster.tests.shoppingcart/service/1.0.0-SNAPSHOT</bundle>
    </feature>
 
    <feature name="service-impl">
-      <feature>mvn:me.alanfoster.tests.shoppingcart/service-impl/1.0.0-SNAPSHOT</feature>
+      <bundle>mvn:me.alanfoster.tests.shoppingcart/service-impl/1.0.0-SNAPSHOT</bundle>
    </feature>
 
 </features>
