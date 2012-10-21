@@ -1,4 +1,5 @@
 {
     "host" : "localhost",
-    "port" : "10000"
+    "port" : "10000",
+    "serviceName" : "ShoppingCart"
 }
