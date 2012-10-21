@@ -1,5 +1,7 @@
 {
     "websiteName" : "Alan's Website",
     "motto" : "Alan's Website's Motto",
-    "email" : "alan@website.com"
+    "email" : "alan@website.com",
+
+    "portNumber" : 3000
 }

@@ -75,7 +75,6 @@ app.get("/products/remove/:id", requiresLogin, routes.removeProduct.handle);
 
 app.post("/validateLogin", routes.validateLogin.handle);
 
-
-app.listen(3000, function createServer(){
+app.listen(websiteConfig.portNumber, function createServer(){
   console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
 });
