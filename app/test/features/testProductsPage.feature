@@ -6,14 +6,41 @@ Feature: View Products
   Background:
     Given the application is running
     And there is a mocked soap service running on port '10001'
-    And the mocked products service has the following information
+    And the mocked soap service will return the following information when the 'GetAllProducts' operation is called
     """
-    {
-      "Product" : "test"
-    }
+      {
+          "Products": {
+              "Product": [
+                  {
+                      "productId": "1",
+                      "name": "Cheese",
+                      "description": "The finest cheese ever",
+                      "price": "1.50"
+                  },
+                  {
+                      "productId": "2",
+                      "name": "Beer",
+                      "description": "Lovely Beer",
+                      "price": "2.30"
+                  },
+                  {
+                      "productId": "3",
+                      "name": "Ramen",
+                      "description": "Awesome Ramen",
+                      "price": "1.19"
+                  },
+                  {
+                      "productId": "4",
+                      "name": "Pizza",
+                      "description": "Pizza pizza",
+                      "price": "2.99"
+                  }
+              ]
+          }
+      }
     """
 
-  Scenario: Logging in
+  Scenario: Viewing All Products
     Given I am on the home page
     And I am not logged in
     When I click the 'View All Products' link

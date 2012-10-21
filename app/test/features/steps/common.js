@@ -5,14 +5,14 @@ var steps = function() {
 
     this.Given("the application is running", function(callback) {
         var browser = this.browser;
-        browser.visit("http://localhost:3000/", function() {
+        browser.visit("http://localhost:3001/", function() {
             assert.assertTrue(browser.success, "Server should be running with 2xx status code")
             callback();
         });
     });
 
     this.Given("I am on the home page", function(callback) {
-       this.browser.visit("http://localhost:3000/", callback);
+       this.browser.visit("http://localhost:3001/", callback);
     });
 
     this.Given("the title says '$expectedTitle'", function(expectedTitle, callback) {

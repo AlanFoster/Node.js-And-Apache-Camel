@@ -96,20 +96,23 @@ var steps = function() {
     });
 
 
-    this.Given("the mocked products service has the following information", function(multiline, callback) {
+    this.Given("the mocked soap service will return the following information when the '$operationName' operation is called", function(operationName, multiline, callback) {
         var server = this.server;
         var wsdl = fs.readFileSync(wsdlLocation, 'utf8');
         var json = JSON.parse(multiline);
 
+        var mockedOperations = {};
+        mockedOperations[operationName] = function() {
+            return json;
+        }
+
         var TestService = {
             "ShoppingCart":{
-                "ShoppingCartPort":{
-                    "GetAllProducts":function () {
-                        return json;
-                    }
-                }
+                "ShoppingCartPort": mockedOperations
             }
         };
+
+        console.log("Operation name :: " + operationName);
 
         soap.listen(server, '/ShoppingCart', TestService, wsdl);
         callback();
