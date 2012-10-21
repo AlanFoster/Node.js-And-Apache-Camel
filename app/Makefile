@@ -5,7 +5,7 @@ test :
 
 # Run mocha basic connectivity tests
 testConnectivity :
-	@./node_modules/.bin/mocha -R spec -u exports test/connectivity
+	@./node_modules/.bin/mocha -R spec -u exports test/mocha
 
 # Run full behaviour tests written with cucumber
 testBehaviour :
