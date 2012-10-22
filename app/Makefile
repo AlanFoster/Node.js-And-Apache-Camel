@@ -1,7 +1,7 @@
 #     trap 'kill $!' EXIT
 
 test :
-	make testBehaviour
+	make testConnectivity
 
 # Run mocha basic connectivity tests
 # This ensuresensures there is a valid webservice to connect to

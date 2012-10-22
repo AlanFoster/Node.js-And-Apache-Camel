@@ -3,7 +3,7 @@
     "version":"0.0.1",
     "private":true,
     "scripts":{
-        "start" : "make testConnectivity && node ./app.js",
+        "start" : "npm test && node ./app.js",
         "test":"make test"
     },
     "dependencies":{
