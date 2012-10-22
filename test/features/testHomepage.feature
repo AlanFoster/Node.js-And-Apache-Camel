@@ -1,4 +1,3 @@
-@ignore
 Feature: View website
   As an unregistered user
   I want to see what products are available

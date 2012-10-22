@@ -1,4 +1,3 @@
-@ignore
 Feature: Test Soap Service
   As an unsure developer
   I want to consume and produce soap services
