@@ -1,5 +1,4 @@
 // Java-esque asserts
-// TODO add fail reason
 var Assert = (function () {
     var assertDescriptions = [
         { name: "assertEquals", func: function (expected, actual, reason) { return expected === actual; }, logMessage: "{2} :: Expected <{0}> Received <{1}>" },
