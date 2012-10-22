@@ -3,8 +3,7 @@ var _ = require("underscore");
 var configManager = require("konphyg")(__dirname + "./../config"),
     webserviceConfig = configManager("webservice"),
     soap = require("soap"),
-    serviceLocation = "http://" + webserviceConfig.host + ":" + webserviceConfig.port + "/" + webserviceConfig.serviceName + "?wsdl",
-    assert = require("./../test/helpers/assert");
+    serviceLocation = "http://" + webserviceConfig.host + ":" + webserviceConfig.port + "/" + webserviceConfig.serviceName + "?wsdl";
 
 var products = [
     {id : 1, name : "Cheese", description : "The finest cheese ever", price : "1.50"},
@@ -15,9 +14,7 @@ var products = [
 
 exports.getAllProducts = function(callback) {
     soap.createClient(serviceLocation, function(err, client) {
-        assert.assertTrue(!err, "there should not be a client error");
         client.GetAllProducts({}, function(err, result) {
-            assert.assertTrue(!err, "Expected no error from GetProduct call");
             callback(undefined, result.Products.Product);
         });
     });
