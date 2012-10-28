@@ -3,6 +3,10 @@ var steps = function() {
     var assert = require("./../../helpers/assert");
     var _ = require("underscore");
 
+    this.Given("I am on the products page", function(callback) {
+        this.browser.visit("http://localhost:3001/viewAllProducts", callback);
+    });
+
     this.Then("the products page will show the following information", function(table, callback) {
         var browser = this.browser;
 
