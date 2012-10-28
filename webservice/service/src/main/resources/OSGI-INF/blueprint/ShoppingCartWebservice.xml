@@ -15,7 +15,7 @@
 		address="http://localhost:10000/ShoppingCart"
 		serviceClass="me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.ShoppingCartPortType">
 		<cxf:properties>
-			<entry key="dataFormat" value="PAYLOAD" /> 
+			<entry key="dataFormat" value="POJO" /> 
 		</cxf:properties>
 	</cxf:cxfEndpoint>
 
@@ -30,9 +30,6 @@
 			<recipientList>
 				<simple>bean:shoppingCartServiceImpl?method=${bean:operationNameHelper?method=getOperationName}</simple>
 			</recipientList>
-			<setBody>
-				<simple>${bodyAs(String)}</simple>
-			</setBody>
 			<log message="Responding" />
 		</route>
 	</camelContext>
