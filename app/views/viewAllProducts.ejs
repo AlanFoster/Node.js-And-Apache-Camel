@@ -22,7 +22,7 @@
         <td name="productDescription"><?= product.description ?></td>
         <td name="productPrice">£<?= product.price ?></td>
 <!--        <td><a href="#">View more details</a></td>-->
-        <td name="addToCart"><a href="/products/add/<?= product.id ?>">Add To Cart</a></td>
+        <td name="addToCart"><a href="/products/add/<?= product.productId ?>" alt="Add <?= product.name ?> to your cart">Add To Cart</a></td>
     </tr>
     <? }); ?>
 </table>

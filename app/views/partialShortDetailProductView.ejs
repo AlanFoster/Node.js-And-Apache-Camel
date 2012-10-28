@@ -1,7 +1,9 @@
-<? if(shoppingCart && shoppingCart.length > 0) { ?>
-        <? shoppingCart.forEach(function(product, index) { ?>
-            <div><?= index + 1 ?> . <?= product.name ?> x <?= product.quantity ?></div>
-        <? }); ?>
-<? } else { ?>
-    <p><i>Empty Shopping Cart</i></p>
-<? } ?>
+<div id="shoppingCartShortDetail">
+    <? if(shoppingCart && shoppingCart.length > 0) { ?>
+            <? shoppingCart.forEach(function(product, index) { ?>
+                <div><?= index + 1 ?> . <?= product.name ?> x <?= product.quantity ?></div>
+            <? }); ?>
+    <? } else { ?>
+        <p><i>Empty Shopping Cart</i></p>
+    <? } ?>
+</div>
