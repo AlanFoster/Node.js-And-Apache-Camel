@@ -1,4 +1,8 @@
+<script src="/js/searchProducts.js"></script>
 <p>Here are all of our products</p>
+
+<div>Search for a product</div>
+<div><input id="productSearch" /><input type="button" id="productSearchSubmit" /></div>
 
 <table class="table table-striped" id="productsTable">
     <thead>
@@ -13,12 +17,12 @@
     </thead>
     <? products.forEach(function(product) { ?>
     <tr>
-        <td><?= product.productId ?></td>
-        <td><?= product.name ?></td>
-        <td><?= product.description ?></td>
-        <td>£<?= product.price ?></td>
+        <td name="productId"><?= product.productId ?></td>
+        <td name="productName"><?= product.name ?></td>
+        <td name="productDescription"><?= product.description ?></td>
+        <td name="productPrice">£<?= product.price ?></td>
 <!--        <td><a href="#">View more details</a></td>-->
-        <td><a href="/products/add/<?= product.id ?>">Add To Cart</a></td>
+        <td name="addToCart"><a href="/products/add/<?= product.id ?>">Add To Cart</a></td>
     </tr>
     <? }); ?>
 </table>
