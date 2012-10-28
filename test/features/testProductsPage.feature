@@ -34,11 +34,18 @@ Feature: View Products
                       "name": "Pizza",
                       "description": "Pizza pizza",
                       "price": "2.99"
+                  },
+                  {
+                      "productId": "5",
+                      "name": "Chicken",
+                      "description": "Chicken Description",
+                      "price": "3.99"
                   }
               ]
           }
       }
     """
+
 
   Scenario: Viewing All Products
     Given I am on the home page
@@ -51,3 +58,4 @@ Feature: View Products
       | 2 | Beer         | Lovely Beer            | £2.30 | Add To Cart |
       | 3 | Ramen        | Awesome Ramen          | £1.19 | Add To Cart |
       | 4 | Pizza        | Pizza pizza            | £2.99 | Add To Cart |
+      | 5 | Chicken      | Chicken Description    | £3.99 | Add To Cart |
