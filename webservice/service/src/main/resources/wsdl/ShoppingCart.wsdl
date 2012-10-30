@@ -73,8 +73,8 @@
             <!-- Global Types -->
             <xs:complexType name="GenericResponseType">
            		<xs:sequence>
-           			<xs:element name="Error" type="xs:boolean" default="false" />
-           			<xs:element name="ErrorReason" type="xs:string" />
+           			<xs:element name="error" type="xs:boolean" default="false" />
+           			<xs:element name="errorReason" type="xs:string" />
            		</xs:sequence>
             </xs:complexType>
             <xs:complexType name="ProductType">
