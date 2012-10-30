@@ -49,7 +49,7 @@ public class ProductTests {
     	GetProductResponse response = shoppingCart.getProduct(request);
     	ProductType actualProduct = response.getProduct();
     	
-    	assertEqual(expectedProduct, actualProduct);
+    	assertEquals(expectedProduct, actualProduct);
     }
     
     @Test
