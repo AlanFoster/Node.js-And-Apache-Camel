@@ -92,6 +92,10 @@ public class ShoppingCartPortTypeImpl implements ShoppingCartPortType {
        
 		GetProductResponse response = new GetProductResponse();
         response.setProduct(product);
+        if(product == null) {
+			response.setError(true);
+			response.setErrorReason("There was no matching product for this product id");
+        }
         return response;
     }
 
@@ -113,7 +117,10 @@ public class ShoppingCartPortTypeImpl implements ShoppingCartPortType {
 		
 		GetCustomerResponse response = new GetCustomerResponse();
 		response.setCustomer(customer);
-		response.setSuccess(customer != null);
+		if(customer == null) {
+			response.setError(true);
+			response.setErrorReason("No Matching Customer Found");
+		}
 		
 		return response;
 	}

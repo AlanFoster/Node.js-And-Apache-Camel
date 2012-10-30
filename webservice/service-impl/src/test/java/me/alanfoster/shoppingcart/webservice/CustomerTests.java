@@ -51,7 +51,7 @@ public class CustomerTests {
     	ShoppingCartPortTypeImpl shoppingCart = getShoppingCartPortType();
     	shoppingCart.setCustomers(customers);
     	GetCustomerResponse response = shoppingCart.getCustomer(request);
-    	assertTrue("Customer should have been found", response.isSuccess());
+    	assertFalse("Customer should have been found", response.isError());
     	CustomerType actualCustomer = response.getCustomer();
     	
     	assertEqual(expectedCustomer, actualCustomer);
@@ -76,7 +76,8 @@ public class CustomerTests {
     	shoppingCart.setCustomers(customers);
     	
     	GetCustomerResponse response = shoppingCart.getCustomer(request);
-    	assertFalse("Customer should not have been found", response.isSuccess());
+    	assertTrue("Customer should not have been found", response.isError());
+    	assertEquals("Valid description should be returned", "No Matching Customer Found", response.getErrorReason());
     	CustomerType actualCustomer = response.getCustomer();
     	assertNull("No customer should have been returned", actualCustomer);
     }
@@ -106,7 +107,7 @@ public class CustomerTests {
     	shoppingCart.setCustomers(customers);
     	
     	GetCustomerResponse response = shoppingCart.getCustomer(request);
-    	assertTrue("Customer should have been found", response.isSuccess());
+    	assertFalse("Customer should have been found", response.isError());
     	CustomerType actualCustomer = response.getCustomer();
     	
     	assertEqual(expectedCustomer, actualCustomer);

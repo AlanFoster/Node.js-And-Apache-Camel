@@ -2,6 +2,7 @@ package me.alanfoster.shoppingcart.webservice;
 
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import me.alanfoster.shoppingcart.webservice.util.ProductFactory;
@@ -50,6 +51,24 @@ public class ProductTests {
     	ProductType actualProduct = response.getProduct();
     	
     	assertEquals(expectedProduct, actualProduct);
+    }
+    
+    @Test
+    public void testGetUnknownProduct() throws Exception {
+    	List<ProductType> products = new LinkedList<ProductType>();
+    	
+    	ShoppingCartPortTypeImpl shoppingCart = getShoppingCartPortType();
+    	shoppingCart.setProducts(products);
+    	
+    	GetProductRequest request = new GetProductRequest();
+    	request.setProductId("1");
+    	
+    	GetProductResponse response = shoppingCart.getProduct(request);
+    	ProductType responseProduct = response.getProduct();
+    	
+    	assertTrue("Error should have occured", response.isError());
+    	assertEquals("Error Description should be as expected", "There was no matching product for this product id", response.getErrorReason());
+    	assertNull("No product should have been returned", responseProduct);
     }
     
     @Test
