@@ -3,6 +3,7 @@ package me.alanfoster.shoppingcart.webservice;
 import java.util.Arrays;
 import java.util.List;
 
+import me.alanfoster.shoppingcart.webservice.util.CustomerFactory;
 import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.CustomerType;
 import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.GetCustomerRequest;
 import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.GetCustomerResponse;
@@ -40,9 +41,7 @@ public class CustomerTests {
     	String requestEmail = "alan@foo.com";
     	String requestPassword = "rawTextForNow";
     	
-    	CustomerType expectedCustomer = new CustomerType();
-    	expectedCustomer.setEmail(customerEmail);
-    	expectedCustomer.setPassword(customerPassword);
+    	CustomerType expectedCustomer = CustomerFactory.getNewCustomer(customerEmail, customerPassword);
     	List<CustomerType> customers = Arrays.asList(expectedCustomer);
      	
     	GetCustomerRequest request = new GetCustomerRequest();
@@ -66,9 +65,7 @@ public class CustomerTests {
     	String requestEmail = "alan@foo.com";
     	String requestPassword = "WrongPassword";
     	
-    	CustomerType expectedCustomer = new CustomerType();
-    	expectedCustomer.setEmail(customerEmail);
-    	expectedCustomer.setPassword(customerPassword);
+    	CustomerType expectedCustomer = CustomerFactory.getNewCustomer(customerEmail, customerPassword);
     	List<CustomerType> customers = Arrays.asList(expectedCustomer);
      	
     	GetCustomerRequest request = new GetCustomerRequest();
@@ -90,7 +87,6 @@ public class CustomerTests {
     	// TODO
     }
     
-    @Ignore
     @Test
     public void testGetKnownCustomerShoppingCartWithValidPassword() throws Exception {
     	String customerEmail = "alan@foo.com";
@@ -99,17 +95,18 @@ public class CustomerTests {
     	String requestEmail = "alan@foo.com";
     	String requestPassword = "rawTextForNow";
     	
-    	CustomerType expectedCustomer = new CustomerType();
-    	expectedCustomer.setEmail(customerEmail);
-    	expectedCustomer.setPassword(customerPassword);
-     	
+    	CustomerType expectedCustomer = CustomerFactory.getNewCustomer(customerEmail, customerPassword);
+    	List<CustomerType> customers = Arrays.asList(expectedCustomer);
+
     	GetCustomerRequest request = new GetCustomerRequest();
     	request.setEmail(requestEmail);
     	request.setPassword(requestPassword);
 
     	ShoppingCartPortTypeImpl shoppingCart = getShoppingCartPortType();
+    	shoppingCart.setCustomers(customers);
+    	
     	GetCustomerResponse response = shoppingCart.getCustomer(request);
-    	assertFalse("Customer should not have been found", response.isSuccess());
+    	assertTrue("Customer should have been found", response.isSuccess());
     	CustomerType actualCustomer = response.getCustomer();
     	
     	assertEqual(expectedCustomer, actualCustomer);

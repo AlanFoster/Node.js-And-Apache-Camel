@@ -1,5 +1,6 @@
 package me.alanfoster.shoppingcart.webservice;
 
+import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -8,7 +9,9 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
+import me.alanfoster.shoppingcart.webservice.util.CustomerFactory;
 import me.alanfoster.shoppingcart.webservice.util.ProductFactory;
+import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.CartItemType;
 import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.CustomerType;
 import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.GetAllProductsRequest;
 import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.GetAllProductsResponse;
@@ -52,7 +55,15 @@ public class ShoppingCartPortTypeImpl implements ShoppingCartPortType {
     }
     
     private List<CustomerType> getDefaultCustomers() {
-    	return new LinkedList<CustomerType>();
+    	List<CustomerType> customers = new LinkedList<CustomerType>();
+    	CustomerType customer = CustomerFactory.getNewCustomer("foo", "bar");
+    	CartItemType cartItem = new CartItemType();
+    	cartItem.setQuantity(BigInteger.ONE);
+    	cartItem.setProduct(ProductFactory.getNewProduct("1", "Cheese", "It's cheese", 1.99f));
+    	customer.getShoppingCart().getCartItem().add(cartItem);
+    	customers.add(customer);
+    	
+    	return customers;
     }
     
     protected List<ProductType> getProducts() {
