@@ -27,9 +27,13 @@
             </xs:element>
             <xs:element name="GetProductResponse">
                 <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="Product" type="sc:ProductType" />
-                    </xs:sequence>
+                	<xs:complexContent>
+	                	<xs:extension base="sc:GenericResponseType">
+		                    <xs:sequence>
+		                        <xs:element name="Product" type="sc:ProductType" />
+		                    </xs:sequence>
+	                    </xs:extension>
+                    </xs:complexContent>
                 </xs:complexType>
             </xs:element>
             <xs:element name="GetAllProductsRequest" >
@@ -37,9 +41,13 @@
             </xs:element>
             <xs:element name="GetAllProductsResponse">
                 <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="Products" type="sc:ProductsType" />
-                    </xs:sequence>
+                	<xs:complexContent>
+	                	<xs:extension base="sc:GenericResponseType">
+		                    <xs:sequence>
+                      		  <xs:element name="Products" type="sc:ProductsType" />
+		                    </xs:sequence>
+	                    </xs:extension>
+                    </xs:complexContent>
                 </xs:complexType>
             </xs:element>
             <!-- User Operations -->
@@ -53,13 +61,22 @@
             </xs:element>
             <xs:element name="GetCustomerResponse">
                 <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="success" type="xs:boolean" default="false" />
-                        <xs:element name="Customer" type="sc:CustomerType" />
-                    </xs:sequence>
+                	<xs:complexContent>
+	                	<xs:extension base="sc:GenericResponseType">
+		                    <xs:sequence>
+                        		<xs:element name="Customer" type="sc:CustomerType" />
+		                    </xs:sequence>
+	                    </xs:extension>
+                    </xs:complexContent>
                 </xs:complexType>
             </xs:element>
             <!-- Global Types -->
+            <xs:complexType name="GenericResponseType">
+           		<xs:sequence>
+           			<xs:element name="Error" type="xs:boolean" default="false" />
+           			<xs:element name="ErrorReason" type="xs:string" />
+           		</xs:sequence>
+            </xs:complexType>
             <xs:complexType name="ProductType">
                 <xs:sequence>
                     <xs:element name="productId" type="xs:string" />
