@@ -55,6 +55,19 @@
 		<scope>test</scope>
 	</dependency>
 	
+    <dependency>
+        <groupId>info.cukes</groupId>
+        <artifactId>cucumber-picocontainer</artifactId>
+        <version>1.1.1</version>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>info.cukes</groupId>
+        <artifactId>cucumber-junit</artifactId>
+        <version>1.1.1</version>
+        <scope>test</scope>
+    </dependency>
+	
 	<!--  Dependency for the ShoppingCart proxy classes -->
 	<dependency>
 		<groupId>me.alanfoster.tests.shoppingcart</groupId>
