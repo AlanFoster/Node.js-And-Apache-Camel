@@ -35,13 +35,14 @@ public class CustomerTests {
 	
     @Test
     public void testGetKnownCustomerWithValidPassword() throws Exception {
+    	String customerId = "1";
     	String customerEmail = "alan@foo.com";
     	String customerPassword = "rawTextForNow";
     	
     	String requestEmail = "alan@foo.com";
     	String requestPassword = "rawTextForNow";
     	
-    	CustomerType expectedCustomer = CustomerFactory.getNewCustomer(customerEmail, customerPassword);
+    	CustomerType expectedCustomer = CustomerFactory.getNewCustomer(customerId, customerEmail, customerPassword);
     	List<CustomerType> customers = Arrays.asList(expectedCustomer);
      	
     	GetCustomerRequest request = new GetCustomerRequest();
@@ -59,13 +60,14 @@ public class CustomerTests {
     
     @Test
     public void testGetKnownCustomerWithInvalidPassword() throws Exception {
+    	String customerId = "1";
     	String customerEmail = "alan@foo.com";
     	String customerPassword = "rawTextForNow";
     	
     	String requestEmail = "alan@foo.com";
     	String requestPassword = "WrongPassword";
     	
-    	CustomerType expectedCustomer = CustomerFactory.getNewCustomer(customerEmail, customerPassword);
+    	CustomerType expectedCustomer = CustomerFactory.getNewCustomer(customerId, customerEmail, customerPassword);
     	List<CustomerType> customers = Arrays.asList(expectedCustomer);
      	
     	GetCustomerRequest request = new GetCustomerRequest();
@@ -90,13 +92,14 @@ public class CustomerTests {
     
     @Test
     public void testGetKnownCustomerShoppingCartWithValidPassword() throws Exception {
+    	String customerId = "1";
     	String customerEmail = "alan@foo.com";
     	String customerPassword = "rawTextForNow";
     	
     	String requestEmail = "alan@foo.com";
     	String requestPassword = "rawTextForNow";
     	
-    	CustomerType expectedCustomer = CustomerFactory.getNewCustomer(customerEmail, customerPassword);
+    	CustomerType expectedCustomer = CustomerFactory.getNewCustomer(customerId, customerEmail, customerPassword);
     	List<CustomerType> customers = Arrays.asList(expectedCustomer);
 
     	GetCustomerRequest request = new GetCustomerRequest();
@@ -112,6 +115,4 @@ public class CustomerTests {
     	
     	assertEqual(expectedCustomer, actualCustomer);
     }
-
-
 }

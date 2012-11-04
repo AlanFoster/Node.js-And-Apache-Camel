@@ -11,4 +11,8 @@ public class ProductFactory {
     	product.setPrice(price);
     	return product;
     }
+    
+    public static ProductType getNewProduct(ProductType product) {
+    	return getNewProduct(product.getProductId(), product.getName(), product.getDescription(), product.getPrice());
+    }
 }

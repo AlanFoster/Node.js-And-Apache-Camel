@@ -11,6 +11,8 @@ import org.apache.log4j.Logger;
 
 import me.alanfoster.shoppingcart.webservice.util.CustomerFactory;
 import me.alanfoster.shoppingcart.webservice.util.ProductFactory;
+import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.AddProductToCustomerAccountRequest;
+import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.AddProductToCustomerAccountResponse;
 import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.CartItemType;
 import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.CustomerType;
 import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.GetAllProductsRequest;
@@ -21,6 +23,8 @@ import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.GetProductRequest;
 import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.GetProductResponse;
 import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.ProductType;
 import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.ProductsType;
+import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.RemoveProductFromCustomerAccountRequest;
+import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.RemoveProductFromCustomerAccountResponse;
 import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.ShoppingCartPortType;
 
 public class ShoppingCartPortTypeImpl implements ShoppingCartPortType {
@@ -131,6 +135,20 @@ public class ShoppingCartPortTypeImpl implements ShoppingCartPortType {
 				return customer;
 			}
 		}
+		return null;
+	}
+
+	@Override
+	public AddProductToCustomerAccountResponse addProductToCustomerAccount(
+			AddProductToCustomerAccountRequest arg0) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public RemoveProductFromCustomerAccountResponse removeProductFromCustomerAccount(
+			RemoveProductFromCustomerAccountRequest arg0) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 }
