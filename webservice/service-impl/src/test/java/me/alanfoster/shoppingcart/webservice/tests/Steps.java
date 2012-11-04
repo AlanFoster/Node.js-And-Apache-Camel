@@ -13,6 +13,8 @@ import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.AddProductToCustomerAc
 import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.CartItemType;
 import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.CustomerType;
 import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.ProductType;
+import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.RemoveProductFromCustomerAccountRequest;
+import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.RemoveProductFromCustomerAccountResponse;
 import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.ShoppingCart;
 import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.ShoppingCartType;
 
@@ -26,10 +28,10 @@ import static junit.framework.Assert.*;
 import static org.junit.Assert.assertEquals;
 
 public class Steps {
-	
 	private ShoppingCartPortTypeImpl shoppingCartPortTypeImpl;
-	
 	private AddProductToCustomerAccountResponse response;
+	private RemoveProductFromCustomerAccountResponse removeProductResponse;
+	private CustomerType customer;
 	
 	public ShoppingCartPortTypeImpl getShoppingCartPortType() {
 		if(shoppingCartPortTypeImpl == null) {
@@ -54,6 +56,7 @@ public class Steps {
 	@When("^I call the addProductToCustomerAccount operation with the following information$")
 	public void I_call_the_addProductToCustomerAccount_operation_with_the_following_information(List<AddProductToCustomerAccountRequest> requests) throws Throwable {
 		response = getShoppingCartPortType().addProductToCustomerAccount(requests.get(0));
+		customer = response.getCustomer();
 	}
 	
 
@@ -65,7 +68,7 @@ public class Steps {
 
 	@Then("^the returned customer shall have the following core information$")
 	public void the_returned_customer_shall_have_the_following_core_information(DataTable customers) throws Throwable {
-		CustomerType actualCustomer = response.getCustomer();
+		CustomerType actualCustomer = customer;
 		
 		Map<String, String> data = customers.asMaps().get(0);
 		String expectedCustomerId = data.get("CustomerId");
@@ -94,8 +97,19 @@ public class Steps {
 			expectedShoppingCart.getCartItem().add(cartItem);
 		}
 		
-		ShoppingCartType actualShoppingCart = response.getCustomer().getShoppingCart();
+		ShoppingCartType actualShoppingCart = customer.getShoppingCart();
 		assertNotNull("There should have been a shopping cart object returned", actualShoppingCart);
 		CustomerAssert.assertEqual(expectedShoppingCart, actualShoppingCart);
+	}
+	
+	@When("^I call the removeProductFromCustomerAccount operation with the following information$")
+	public void I_call_the_removeProductFromCustomerAccount_operation_with_the_following_information(List<RemoveProductFromCustomerAccountRequest> requests) throws Throwable {
+		removeProductResponse = getShoppingCartPortType().removeProductFromCustomerAccount(requests.get(0));
+		customer = removeProductResponse.getCustomer();
+	}
+
+	@Then("^the returned customer shall have no shopping cart$")
+	public void the_returned_customer_shall_have_no_shopping_cart() throws Throwable {
+	    assertEquals("Shopping cart should be empty", 0, customer.getShoppingCart().getCartItem().size());
 	}
 }

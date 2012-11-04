@@ -6,7 +6,6 @@ import java.util.Iterator;
 
 import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.CartItemType;
 import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.CustomerType;
-import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.ProductType;
 import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.ShoppingCartType;
 
 public class CustomerAssert {

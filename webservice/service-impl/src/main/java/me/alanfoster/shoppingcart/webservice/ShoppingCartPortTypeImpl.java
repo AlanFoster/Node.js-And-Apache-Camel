@@ -2,6 +2,7 @@ package me.alanfoster.shoppingcart.webservice;
 
 import java.math.BigInteger;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -169,8 +170,38 @@ public class ShoppingCartPortTypeImpl implements ShoppingCartPortType {
 
 	
 	@Override
-	public RemoveProductFromCustomerAccountResponse removeProductFromCustomerAccount(RemoveProductFromCustomerAccountRequest arg0) {
-		// TODO Auto-generated method stub
-		return null;
+	public RemoveProductFromCustomerAccountResponse removeProductFromCustomerAccount(RemoveProductFromCustomerAccountRequest body) {
+		RemoveProductFromCustomerAccountResponse response = new RemoveProductFromCustomerAccountResponse();
+		
+		String customerId = body.getCustomerId();
+		String productId = body.getProductId();
+		BigInteger quantity = body.getQuantity();
+		
+		CustomerType customer = getCustomer(customerId);
+		List<CartItemType> cartItems = customer.getShoppingCart().getCartItem();
+		
+		CartItemType cartItemToRemove = null;
+		for(CartItemType cartItem : cartItems) {
+			if(cartItem.getProduct().getProductId().equals(productId)) {
+				BigInteger newQuantity = cartItem.getQuantity().subtract(quantity);
+				int signum = newQuantity.signum();
+				if(signum == 0) {
+					cartItemToRemove = cartItem;
+					break;
+				} else if(signum == -1){ 
+					// Error as negative shopping cart
+				} else {
+					cartItem.setQuantity(newQuantity);
+					break;
+				}
+			}
+		}
+		
+		if(cartItemToRemove != null) {
+			cartItems.remove(cartItemToRemove);
+		}
+		
+		response.setCustomer(customer);
+		return response;
 	}
 }
