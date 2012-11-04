@@ -35,7 +35,7 @@ public class ShoppingCartPortTypeImpl implements ShoppingCartPortType {
      * ProductId mapping to Product
      */
     private Map<String, ProductType> products;
-    private List<CustomerType> customers;
+    private Map<String, CustomerType> customers;
     
     public ShoppingCartPortTypeImpl() {
 
@@ -60,7 +60,7 @@ public class ShoppingCartPortTypeImpl implements ShoppingCartPortType {
     
     private List<CustomerType> getDefaultCustomers() {
     	List<CustomerType> customers = new LinkedList<CustomerType>();
-    	CustomerType customer = CustomerFactory.getNewCustomer("foo", "bar");
+    	CustomerType customer = CustomerFactory.getNewCustomer("1", "foo", "bar");
     	CartItemType cartItem = new CartItemType();
     	cartItem.setQuantity(BigInteger.ONE);
     	cartItem.setProduct(ProductFactory.getNewProduct("1", "Cheese", "It's cheese", 1.99f));
@@ -82,17 +82,20 @@ public class ShoppingCartPortTypeImpl implements ShoppingCartPortType {
     }
     
     protected List<CustomerType> getCustomers() {
-    	return new LinkedList<CustomerType>(customers);
+    	return new LinkedList<CustomerType>(customers.values());
     }
     
     public void setCustomers(List<CustomerType> customers) {
-    	this.customers = customers;
+    	this.customers = new LinkedHashMap<String, CustomerType>();
+    	for(CustomerType customer : customers) {
+    		this.customers.put(customer.getCustomerId(), customer);
+    	}
     }
     
 	@Override
 	public GetProductResponse getProduct(GetProductRequest body) {
 		logger.info("Executing operation getProduct");
-		ProductType product = products.get(body.getProductId());
+		ProductType product = getProduct(body.getProductId());
        
 		GetProductResponse response = new GetProductResponse();
         response.setProduct(product);
@@ -103,6 +106,10 @@ public class ShoppingCartPortTypeImpl implements ShoppingCartPortType {
         return response;
     }
 
+	private ProductType getProduct(String productId) {
+		return products.get(productId);
+	}
+	
 	@Override
 	public GetAllProductsResponse getAllProducts(GetAllProductsRequest body) {
 		GetAllProductsResponse response = new GetAllProductsResponse();
@@ -130,7 +137,7 @@ public class ShoppingCartPortTypeImpl implements ShoppingCartPortType {
 	}
 	
 	private CustomerType getCustomer(String email, String password) {
-		for(CustomerType customer : customers) {
+		for(CustomerType customer : customers.values()) {
 			if(customer.getPassword().equals(password) && customer.getEmail().equals(email)) {
 				return customer;
 			}
@@ -138,16 +145,30 @@ public class ShoppingCartPortTypeImpl implements ShoppingCartPortType {
 		return null;
 	}
 
+	private CustomerType getCustomer(String customerId) {
+		return customers.get(customerId);
+	}
+	
 	@Override
-	public AddProductToCustomerAccountResponse addProductToCustomerAccount(
-			AddProductToCustomerAccountRequest arg0) {
-		// TODO Auto-generated method stub
-		return null;
+	public AddProductToCustomerAccountResponse addProductToCustomerAccount(AddProductToCustomerAccountRequest body) {
+		AddProductToCustomerAccountResponse response = new AddProductToCustomerAccountResponse();
+		String customerId = body.getCustomerId();
+		String productId = body.getProductId();
+		
+		CustomerType customer = getCustomer(customerId);
+		List<CartItemType> cartItems = customer.getShoppingCart().getCartItem();
+		CartItemType cartItem = new CartItemType();
+    	cartItem.setQuantity(BigInteger.ONE);
+    	cartItem.setProduct(getProduct(productId));
+		cartItems.add(cartItem);
+		
+		response.setCustomer(customer);
+		return response;
 	}
 
+	
 	@Override
-	public RemoveProductFromCustomerAccountResponse removeProductFromCustomerAccount(
-			RemoveProductFromCustomerAccountRequest arg0) {
+	public RemoveProductFromCustomerAccountResponse removeProductFromCustomerAccount(RemoveProductFromCustomerAccountRequest arg0) {
 		// TODO Auto-generated method stub
 		return null;
 	}
