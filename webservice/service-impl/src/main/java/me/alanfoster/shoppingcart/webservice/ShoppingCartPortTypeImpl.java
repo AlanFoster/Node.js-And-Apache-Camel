@@ -154,11 +154,12 @@ public class ShoppingCartPortTypeImpl implements ShoppingCartPortType {
 		AddProductToCustomerAccountResponse response = new AddProductToCustomerAccountResponse();
 		String customerId = body.getCustomerId();
 		String productId = body.getProductId();
+		BigInteger quantity = body.getQuantity();
 		
 		CustomerType customer = getCustomer(customerId);
 		List<CartItemType> cartItems = customer.getShoppingCart().getCartItem();
 		CartItemType cartItem = new CartItemType();
-    	cartItem.setQuantity(BigInteger.ONE);
+    	cartItem.setQuantity(quantity);
     	cartItem.setProduct(getProduct(productId));
 		cartItems.add(cartItem);
 		
