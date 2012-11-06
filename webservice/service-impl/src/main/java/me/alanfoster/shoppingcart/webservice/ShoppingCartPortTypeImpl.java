@@ -2,7 +2,6 @@ package me.alanfoster.shoppingcart.webservice;
 
 import java.math.BigInteger;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -27,6 +26,7 @@ import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.ProductsType;
 import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.RemoveProductFromCustomerAccountRequest;
 import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.RemoveProductFromCustomerAccountResponse;
 import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.ShoppingCartPortType;
+import me.alanfoster.tests.shoppingcart.wsdl.proxyclasses.ShoppingCartType;
 
 public class ShoppingCartPortTypeImpl implements ShoppingCartPortType {
 
@@ -158,17 +158,31 @@ public class ShoppingCartPortTypeImpl implements ShoppingCartPortType {
 		BigInteger quantity = body.getQuantity();
 		
 		CustomerType customer = getCustomer(customerId);
-		List<CartItemType> cartItems = customer.getShoppingCart().getCartItem();
-		CartItemType cartItem = new CartItemType();
-    	cartItem.setQuantity(quantity);
-    	cartItem.setProduct(getProduct(productId));
-		cartItems.add(cartItem);
+		
+		CartItemType cartItem = getOrCreateCartItem(customer.getShoppingCart(), productId);
+		cartItem.setQuantity(cartItem.getQuantity().add(quantity));
 		
 		response.setCustomer(customer);
 		return response;
 	}
-
 	
+	private CartItemType getOrCreateCartItem(ShoppingCartType shoppingCart, String productId) {
+		List<CartItemType> shoppingCartList = shoppingCart.getCartItem();
+		
+		for(CartItemType cartItem : shoppingCartList) {
+			if(cartItem.getProduct().getProductId().equals(productId)) {
+				return cartItem;
+			}
+		}
+		// No Matching CartItem has fbeen found at this point in time, so create one and return it
+		CartItemType cartItem = new CartItemType();
+		cartItem.setProduct(getProduct(productId));
+		cartItem.setQuantity(BigInteger.ZERO);
+		shoppingCartList.add(cartItem);
+		
+		return cartItem;
+	}
+
 	@Override
 	public RemoveProductFromCustomerAccountResponse removeProductFromCustomerAccount(RemoveProductFromCustomerAccountRequest body) {
 		RemoveProductFromCustomerAccountResponse response = new RemoveProductFromCustomerAccountResponse();
