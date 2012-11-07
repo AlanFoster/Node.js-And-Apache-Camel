@@ -67,3 +67,7 @@ Feature: Removing Products to a customer's shopping cart
       | CustomerId | Email        | Password      |
       | 1          | alan@foo.com | rawTextForNow |
 	And the returned customer shall have no shopping cart
+ 
+  Scenario: Trying to remove more products than the customer currently has
+  Scenario: Trying to remove a product that the customer doesn't have
+  Scenario: Trying to remove a product that does not exist
