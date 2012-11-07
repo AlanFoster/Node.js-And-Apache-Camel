@@ -11,20 +11,17 @@ exports.viewLogin = {
 exports.validateLogin = {
     menuName : "User",
     handle : function(req, res) {
-        users.getUserByEmailAndPassword(req.param("email"), req.param("password"), function(err, user) {
-            var loginSuccess = !!user;
-            if(loginSuccess) {
-                // Wouldn't do this in a real app
-                req.session.user = user;
-                req.session.userId  = user.id;
-                users.getFullShoppingCart(user.id, function(err, shoppingCart) {
-                    req.session.shoppingCart = shoppingCart;
-                    res.json({"loginSuccess" : true});
-                });
-                return;
-            }
+        users.getUserByEmailAndPassword(req.param("email"), req.param("password"), function(err, customer) {
+            if(!err) {
+                req.session.user = customer;
+                req.session.userId  = customer.customerId;
+                req.session.shoppingCart = customer.ShoppingCart.CartItem;
 
-            res.json({"loginSuccess" : false});
+                res.json({"loginSuccess" : true});
+                return;
+            } else {
+                res.json({"loginSuccess" : false});
+            }
         });
     }
 };
@@ -41,6 +38,8 @@ exports.logout = {
     handle : function(req, res) {
         req.session.user = undefined;
         req.session.userId = undefined;
+        req.session.shoppingCart = undefined;
+
         res.redirect("/login");
     }
 };
@@ -48,9 +47,32 @@ exports.logout = {
 exports.removeProduct = {
     handle : function(req, res) {
         var productId = parseInt(req.param("id"));
-        users.removeProduct(req.session.userId, productId, function(err, newShoppingCart) {
-           req.session.shoppingCart = newShoppingCart;
+        users.removeProduct(req.session.userId, productId, function(err, customer) {
+           if(err) {
+               // TODO ...
+           }
+           req.session.user = customer;
+           req.session.userId  = customer.customerId;
+           req.session.shoppingCart = customer.ShoppingCart.CartItem;
+
            res.redirect("/shoppingCart");
         });
     }
-}
+};
+
+exports.addProduct = {
+    handle : function(req, res) {
+        var productId = parseInt(req.param("id"));
+        users.addProduct(req.session.userId, productId, function(err, customer) {
+            if(err) {
+                // TODO ...
+            }
+
+            req.session.user = customer;
+            req.session.userId  = customer.customerId;
+            req.session.shoppingCart = customer.ShoppingCart.CartItem;
+
+            res.redirect("/viewAllProducts")
+        });
+    }
+};

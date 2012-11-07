@@ -1,3 +1,5 @@
+<? console.log(shoppingCart); ?>
+
 <? if(shoppingCart && shoppingCart.length > 0) { ?>
     <table class="table table-striped">
         <thead>
@@ -11,15 +13,15 @@
             <th>Remove</th>
         </tr>
         </thead>
-        <? shoppingCart.forEach(function(product) { ?>
+        <? shoppingCart.forEach(function(shoppingCartItem) { ?>
         <tr>
-            <td><?= product.id ?></td>
-            <td><?= product.name ?></td>
-            <td><?= product.description ?></td>
-            <td>£<?= product.price ?></td>
-            <th><?= product.quantity ?></th>
-            <th>£<?= product.quantity  * parseInt(product.price, 0) ?></th>
-            <td><a href="/products/remove/<?= product.id ?>">Remove From Cart</a></td>
+            <td><?= shoppingCartItem.Product.productId ?></td>
+            <td><?= shoppingCartItem.Product.name ?></td>
+            <td><?= shoppingCartItem.Product.description ?></td>
+            <td>£<?= shoppingCartItem.Product.price ?></td>
+            <th><?= shoppingCartItem.quantity ?></th>
+            <th>£<?= shoppingCartItem.quantity  * parseInt(shoppingCartItem.Product.price, 0) ?></th>
+            <td><a href="/products/remove/<?= shoppingCartItem.Product.productId ?>">Remove From Cart</a></td>
         </tr>
         <? }); ?>
     </table>

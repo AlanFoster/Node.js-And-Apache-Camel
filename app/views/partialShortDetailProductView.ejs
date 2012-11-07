@@ -1,7 +1,7 @@
 <div id="shoppingCartShortDetail">
     <? if(shoppingCart && shoppingCart.length > 0) { ?>
-            <? shoppingCart.forEach(function(product, index) { ?>
-                <div><?= index + 1 ?> . <?= product.name ?> x <?= product.quantity ?></div>
+            <? shoppingCart.forEach(function(shoppingCartItem, index) { ?>
+                <div><?= index + 1 ?> . <?= shoppingCartItem.Product.name ?> x <?= shoppingCartItem.quantity ?></div>
             <? }); ?>
     <? } else { ?>
         <p><i>Empty Shopping Cart</i></p>
